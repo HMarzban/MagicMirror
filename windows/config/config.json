@@ -1,3 +1,11 @@
+
+
+
+
+
+
+
+
 {
     "project":"magic miror",
     "version":"1.0.0",
@@ -18,7 +26,17 @@
             "display_src":{
                 "html":"module/calendar/md_calendar.html"
             }
+        },
+        {
+            "name":"DHT22 Sensor",
+            "display_title":"sense temperature humidity room monitoring",
+            "position":"bottom_left",
+            "display_src":{
+                "html":"module/DHT22_sensor/md_sensor.html"
+            }
+
         }
+
 
     ]
         

@@ -1,5 +1,8 @@
 const $ = require("jquery");
 const path = require('path');
+const moment = require('jalali-moment');
+moment.locale('fa');
+
 
 const $config = require(path.join(__dirname,'config/config.json'));
 
