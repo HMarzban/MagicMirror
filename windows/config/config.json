@@ -1,0 +1,26 @@
+{
+    "project":"magic miror",
+    "version":"1.0.0",
+    "author":"Hossein Marzban",
+    "module":[
+        {
+            "name":"clock",
+            "display_title":"local analog clock",
+            "position":"top_right",
+            "display_src":{
+                "html":"module/clock/md_clock.html"
+            }
+        },
+        {
+            "name":"calendar",
+            "display_title":"Calendar Jalali",
+            "position":"top_left",
+            "display_src":{
+                "html":"module/calendar/md_calendar.html"
+            }
+        }
+
+    ]
+        
+    
+}

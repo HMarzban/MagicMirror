@@ -1,0 +1,43 @@
+* {-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box}
+*:before,*:after {-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box}
+
+body,html{
+    margin: 0;padding: 0;position: relative;
+    background-color: black;
+    color: #fff;
+
+}
+
+body{
+    width: 100vw;height: 100vh;
+}
+
+
+.module{float: left;}
+
+
+
+.md_clock{
+    width: 300px;height: 300px;;
+}
+
+
+/*-------------------------------------------*/
+/*  article positon  */
+/*-------------------------------------------*/
+body > .art{position: absolute;}
+
+.art.top_left{top:10px;left: 10px;}
+.art.top_center{top:10px;left: 50%;transform: translateX(-50%);}
+.art.top_right{top:10px;right: 10px;}
+
+
+.art.bottom_left{bottom:10px;right: 10px;}
+.art.bottom_center{bottom:10px;left: 50%;transform: translateX(-50%);}
+.art.bottom_right{bottom:10px;left: 10px;}
+
+
+
+
+
+

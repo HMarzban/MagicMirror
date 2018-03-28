@@ -1,0 +1,50 @@
+
+
+<section class="module md_calendar">
+
+        <script>
+           
+
+            const $cal = require(path.join(__dirname,'module/calendar/api_calendar.json'));
+            console.log($cal.cal['1397'].days[0]);
+
+
+
+            
+
+            $.each( $cal.cal['1397'].days[0] , function( index, val ) {
+                    console.log(val.days.j)
+
+                $('#md_Jcalendar .body').append('<div>'+ val.days.j  +'</div>');
+            });
+
+            
+           // $(' .table tbody').append('<tr>dfgdfddfgdf</tr>');
+
+
+
+        </script>
+
+
+<h1>Hi Man</h1>
+
+<style>
+
+    #md_Jcalendar{width: 412px;border:3px solid #fff;overflow: auto;padding: 5px;border-radius: 4px}
+
+    #md_Jcalendar > .body > div{width:60px;height: 60px;float: right;margin:3px;text-align: center;}
+
+</style>
+
+
+<div id="md_Jcalendar">
+    <div class="head"></div>
+    <div class="body">
+
+    </div>
+</div>
+
+
+
+
+</section>
