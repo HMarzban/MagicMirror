@@ -1,29 +1,111 @@
 <section class="module md_clock">
-    <style id="clock-animations"></style>
-    <div class="clock-wrapper">
-        <div class="clock-base">
-            <div class="click-indicator">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-            <div class="clock-hour"></div>
-            <div class="clock-minute"></div>
-            <div class="clock-second"></div>
-        </div>
-    </div>
+
+    <script>
+
+        (function ($) {
+
+            $.fn.md_clock = function () {
+
+              const  $this = this;
+                console.log("md_clock init")
+
+                const $clock_module = jsonQuery('module[name=clock]', {
+                    data: $config
+                }).value;
+
+
+                let fn_clock_init = function () {
+                    if ($clock_module.type == "analog") {
+
+                        $this.html.html(`
+                                    <style id="clock-animations"></style>
+                                    <div class="clock-wrapper">
+                                        <div class="clock-base">
+                                            <div class="click-indicator">
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                            </div>
+                                            <div class="clock-hour"></div>
+                                            <div class="clock-minute"></div>
+                                            <div class="clock-second"></div>
+                                        </div>
+                                    </div>
+                                `).css({ 'width': '300px', 'height': '300px' });
+
+                        //generate clock animations use GPU
+                        var now = new Date(),
+                            hourDeg = now.getHours() / 12 * 360 + now.getMinutes() / 60 * 30,
+                            minuteDeg = now.getMinutes() / 60 * 360 + now.getSeconds() / 60 * 6,
+                            secondDeg = now.getSeconds() / 60 * 360,
+                            stylesDeg = [
+                                "@-webkit-keyframes rotate-hour{from{transform:rotate(" + hourDeg + "deg);}to{transform:rotate(" + (hourDeg + 360) + "deg);}}",
+                                "@-webkit-keyframes rotate-minute{from{transform:rotate(" + minuteDeg + "deg);}to{transform:rotate(" + (minuteDeg + 360) + "deg);}}",
+                                "@-webkit-keyframes rotate-second{from{transform:rotate(" + secondDeg + "deg);}to{transform:rotate(" + (secondDeg + 360) + "deg);}}",
+                                "@-moz-keyframes rotate-hour{from{transform:rotate(" + hourDeg + "deg);}to{transform:rotate(" + (hourDeg + 360) + "deg);}}",
+                                "@-moz-keyframes rotate-minute{from{transform:rotate(" + minuteDeg + "deg);}to{transform:rotate(" + (minuteDeg + 360) + "deg);}}",
+                                "@-moz-keyframes rotate-second{from{transform:rotate(" + secondDeg + "deg);}to{transform:rotate(" + (secondDeg + 360) + "deg);}}"
+                            ].join("");
+                        $this.find("#clock-animations").html(stylesDeg);
+                    } else if ($clock_module.type == "digital") {
+
+                        $this.html(`
+                                    <div class="digital">
+                                        <div class="timer"></div>
+                                        <div class="date"></div>
+                                        <div class="dayWeek"></div>
+                                    </div>
+                                `);
+
+
+
+                        function update() {
+                            //'D. MMMM YYYY H:mm:ss'
+                            $this.find('.digital .timer').html(moment().format($clock_module.digital_conf.time_format));
+                            $this.find('.digital .date').html(moment().format($clock_module.digital_conf.date_format))
+                            $this.find('.digital .dayWeek').html(moment().format('dddd'))
+                            //console.log(moment().format('D. MMMM YYYY H:mm:ss'))
+                        }
+
+                        setInterval(update, 1000);
+
+                    }
+
+                }//fn_clock_init
+                fn_clock_init();
+
+
+
+            };// $.fn.md_clock
+
+        }(jQuery));
+
+
+
+        $('#md_clock').md_clock();
+
+
+    </script>
+
+    <div id="md_clock"></div>
+
+
 
 
     <style>
+        #md_clock {
+            position: relative;
+        }
+
         .clock-wrapper {
             position: absolute;
             top: 50%;
@@ -173,31 +255,31 @@
             border-radius: 50%;
             box-shadow: 0 0 3px rgba(0, 0, 0, .2);
         }*/
+
+        #md_clock .digital {
+            width: 280px;
+            text-align: left;
+            padding: 10px 20px
+        }
+
+        #md_clock .digital .timer {
+            font-size: 4.66em
+        }
+
+        #md_clock .digital .date {
+            margin-top: -34px;
+            font-size: 1.1em;
+        }
+
+        #md_clock .digital .dayWeek {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: rotate(90deg) translateY(-50%);
+            font-size: 1.44em;
+        }
     </style>
 
-    <script>
 
-        (function () {
-
-            //generate clock animations
-            var now = new Date(),
-                hourDeg = now.getHours() / 12 * 360 + now.getMinutes() / 60 * 30,
-                minuteDeg = now.getMinutes() / 60 * 360 + now.getSeconds() / 60 * 6,
-                secondDeg = now.getSeconds() / 60 * 360,
-                stylesDeg = [
-                    "@-webkit-keyframes rotate-hour{from{transform:rotate(" + hourDeg + "deg);}to{transform:rotate(" + (hourDeg + 360) + "deg);}}",
-                    "@-webkit-keyframes rotate-minute{from{transform:rotate(" + minuteDeg + "deg);}to{transform:rotate(" + (minuteDeg + 360) + "deg);}}",
-                    "@-webkit-keyframes rotate-second{from{transform:rotate(" + secondDeg + "deg);}to{transform:rotate(" + (secondDeg + 360) + "deg);}}",
-                    "@-moz-keyframes rotate-hour{from{transform:rotate(" + hourDeg + "deg);}to{transform:rotate(" + (hourDeg + 360) + "deg);}}",
-                    "@-moz-keyframes rotate-minute{from{transform:rotate(" + minuteDeg + "deg);}to{transform:rotate(" + (minuteDeg + 360) + "deg);}}",
-                    "@-moz-keyframes rotate-second{from{transform:rotate(" + secondDeg + "deg);}to{transform:rotate(" + (secondDeg + 360) + "deg);}}"
-                ].join("");
-
-            document.getElementById("clock-animations").innerHTML = stylesDeg;
-
-        })();
-
-
-    </script>
 
 </section>

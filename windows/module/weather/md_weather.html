@@ -6,14 +6,14 @@
 
         $.fn.md_weather = function() {
           
-            $this = this;
+            const $this = this;
             console.log("md_weather init");
 
             const $weather_module = jsonQuery('module[name=weather]', {
              data: $config
             }).value;
 
-            console.log($weather_module)
+            //console.log($weather_module)
             //.default_config//.api_key//.city_name
             
             let fn_weather_relaod = function(){
@@ -79,9 +79,11 @@
             fn_weather_init();
 
 
-        };
+        };//
         
 }( jQuery ));  
+
+
 
 $('#md_weather').md_weather();
 
@@ -102,8 +104,8 @@ $('#md_weather').md_weather();
 
         #md_weather .lay_tree > div{overflow: hidden;padding: 0 14px;}
         #md_weather .lay_tree .mid{font-size: 3.44em;font-weight: bolder;position: relative;}
-        #md_weather .lay_tree .mid > div{float: left;position: relative;}
-        #md_weather .lay_tree .mid .icon{float: left;margin-right: 34px;width: 84px;height: 84px;}
+        #md_weather .lay_tree .mid > div{float: right;position: relative;}
+        #md_weather .lay_tree .mid .icon{float: left;margin-right: 34px;width: 84px;height: 84px;text-align: left;}
 
         #md_weather .lay_tree .mid .wi-wind{
             position: absolute;bottom: 0;right: 0;font-size: .3em;
