@@ -1,0 +1,131 @@
+<section class="module md_weather">
+
+    <script>
+
+(function ( $ ) {
+
+        $.fn.md_weather = function() {
+          
+            $this = this;
+            console.log("md_weather init");
+
+            const $weather_module = jsonQuery('module[name=weather]', {
+             data: $config
+            }).value;
+
+            console.log($weather_module)
+            //.default_config//.api_key//.city_name
+            
+            let fn_weather_relaod = function(){
+                if($weather_module.default_config.refresh_time.worke){
+                    let i = $weather_module.default_config.refresh_time.time || 30;
+                    let md_weather_relaod = setInterval(function() {
+                        i = i - 1;
+                        //console.log(i)
+                        $this.find('.footer .timer').text(i)
+                        if (i <= 0) {
+                            // get new data
+                            fn_weather_init();
+                            clearInterval(md_weather_relaod);
+                        }
+                    },1000);// setInterval
+                }//worke or not
+            }
+
+
+            let fn_weather_init = function(){
+                //TODO: set spinner for loading
+                $.ajax( "http://api.openweathermap.org/data/2.5/weather?q="+$weather_module.default_config.city_name+"&units=metric&lang=fa&appid="+$weather_module.default_config.api_key )
+                .done(function(res) {
+                $this.html(`
+                    <div class="header ${$weather_module.default_config.showHeader ? '':'nd_display_hide'} ">
+                            <div class="cityName">${$weather_module.default_config.lang.cityName}</div>
+                            <div class="waDec">${res.weather[0].description}</div>   
+                    </div>
+                    <div class="lay_tree">
+                        <div class="top"></div><!--top-->
+                        <div class="mid">
+                            <div class="icon"><i class="wi wi-owm-day-${res.weather[0].id}"></i></div> 
+                            <div class="temp"><i class="wi wi-celsius"></i> ${parseInt( res.main.temp )} <i class="wi wi-wind from-${res.wind.deg}-deg"></i> </div>
+                        </div><!--mid-->
+                        <div class="bot">
+                            <div>
+                                <div class="sunrise"> <p>  ${ moment.unix(res.sys.sunrise).format("hh:mm ")} </p> <i class="wi wi-sunrise"></i> </div>
+                                <div class="sunset"> <p> ${ moment.unix(res.sys.sunset).format("hh:mm ")} </p> <i class="wi wi-sunset"></i> </div>
+                            </div>
+                            <div>
+                                <div class="temp_max">  <i class="wi wi-degrees"></i> ${res.main.temp_max} <i class="wi wi-thermometer"></i>   </div>
+                                <div class="temp_min">  <i class="wi wi-degrees"></i> ${res.main.temp_min} <i class="wi wi-thermometer-exterior"></i> </div>  
+                            </div>
+                            <div>
+                                <div class="wind"> 
+                                        ${res.wind.speed } <i class="wi wi-wind-beaufort-${ parseInt( res.wind.speed )}"></i>
+                                </div>
+                                <div class="humidity">  ${res.main.humidity} <i class="wi wi-humidity"></i> </div>
+                            </div>
+                        </div><!--bot-->
+                    </div><!--lay_tree-->
+                    <div class="footer ${$weather_module.default_config.refresh_time.worke ? '':'nd_display_hide'}"> <span class="timer ${$weather_module.default_config.refresh_time.showTimer ? '':'nd_display_hide'}"></span> <i class="wi wi-refresh"></i> </div><!--footer-->
+                `);
+
+                    fn_weather_relaod();
+                })
+                .fail(function() {
+                    
+                });
+            }// fn_weather_init
+            
+            //fire firstr time
+            fn_weather_init();
+
+
+        };
+        
+}( jQuery ));  
+
+$('#md_weather').md_weather();
+
+
+
+    </script>
+    <style>
+
+        #md_weather{
+            padding: 10px;width: 280px;height: auto;overflow: hidden;
+            /*border:3px solid rgba(255,255,255,.5);*/direction: rtl;text-align: right;
+        
+        }
+        #md_weather .header{text-align: center;margin-bottom: 16px;}
+        #md_weather .header .cityName{font-size: 1.6em;font-weight: bold;}
+        /*====*/
+        #md_weather .lay_tree{width: 100%;float: right;}
+
+        #md_weather .lay_tree > div{overflow: hidden;padding: 0 14px;}
+        #md_weather .lay_tree .mid{font-size: 3.44em;font-weight: bolder;position: relative;}
+        #md_weather .lay_tree .mid > div{float: left;position: relative;}
+        #md_weather .lay_tree .mid .icon{float: left;margin-right: 34px;width: 84px;height: 84px;}
+
+        #md_weather .lay_tree .mid .wi-wind{
+            position: absolute;bottom: 0;right: 0;font-size: .3em;
+        }
+        #md_weather .lay_tree  .sunrise,#md_weather .lay_tree  .sunset{
+            float: left;font-size: 1em;text-align: right;clear: both;
+        }
+        #md_weather .lay_tree  .sunrise > p,#md_weather .lay_tree  .sunset > p{
+            min-width: 44px;float: right;margin: 0 6px;
+        }
+
+        #md_weather .lay_tree .bot >div {
+            float:left;margin-right: 20px;
+        }
+        #md_weather .footer{text-align: left}
+    
+    </style>
+
+<div id="md_weather">
+
+
+
+</div>
+
+</section>

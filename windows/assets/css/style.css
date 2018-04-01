@@ -97,16 +97,17 @@ body,html{
 }
 
 body{
-    width: 100vw;height: 100vh;
+    width: 100vw;height: 100vh;overflow: hidden;
 }
 
+.nd_display_hide{display: none}
 
-.module{float: left;}
+.module{float: left;clear: both;}
 
 
 
 .md_clock{
-    width: 300px;height: 300px;;
+    width: 300px;height: 300px;position: relative;
 }
 
 
@@ -120,9 +121,9 @@ body > .art{position: absolute;}
 .art.top_right{top:10px;right: 10px;}
 
 
-.art.bottom_left{bottom:10px;right: 10px;}
+.art.bottom_left{bottom:10px;left: 10px;}
 .art.bottom_center{bottom:10px;left: 50%;transform: translateX(-50%);}
-.art.bottom_right{bottom:10px;left: 10px;}
+.art.bottom_right{bottom:10px;right: 10px;}
 
 
 

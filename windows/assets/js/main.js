@@ -1,6 +1,8 @@
-const $ = require("jquery");
+const $= require("jquery");
+const jQuery  = require("jquery");
 const path = require('path');
 const moment = require('jalali-moment');
+const jsonQuery = require('json-query')
 moment.locale('fa');
 
 
