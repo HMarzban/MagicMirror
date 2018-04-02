@@ -1,0 +1,27 @@
+<section class="module md_news">
+    <script>
+        
+        (function ( $ ) {
+
+            $.fn.md_news = function() {
+            
+                const $this = this;
+                const $news_module = jsonQuery('module[name=news]', {
+                    data: $config
+                }).value;
+
+
+                /*$.get("http://khabarpu.com/file/kp2/sort_newsagency/latest/newsagency.htm?_=1522680257578",function(_data){
+                    console.log(_data)
+                })*/
+
+                
+                    
+            };// $.fn.md_news
+
+        }( jQuery ));  
+        
+    </script>
+    <style></style>
+    <div id="md_news"></div>
+</section>
