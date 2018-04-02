@@ -7,15 +7,12 @@
         $.fn.md_weather = function() {
           
             const $this = this;
-            console.log("md_weather init");
+
 
             const $weather_module = jsonQuery('module[name=weather]', {
              data: $config
             }).value;
 
-            //console.log($weather_module)
-            //.default_config//.api_key//.city_name
-            
             let fn_weather_relaod = function(){
                 if($weather_module.default_config.refresh_time.worke){
                     let i = $weather_module.default_config.refresh_time.time || 30;
@@ -124,10 +121,6 @@ $('#md_weather').md_weather();
     
     </style>
 
-<div id="md_weather">
-
-
-
-</div>
+<div id="md_weather"></div>
 
 </section>

@@ -6,8 +6,7 @@
 
             $.fn.md_clock = function () {
 
-              const  $this = this;
-                console.log("md_clock init")
+                const $this = this;
 
                 const $clock_module = jsonQuery('module[name=clock]', {
                     data: $config
@@ -81,9 +80,8 @@
                     }
 
                 }//fn_clock_init
+
                 fn_clock_init();
-
-
 
             };// $.fn.md_clock
 
@@ -106,7 +104,7 @@
             position: relative;
         }
 
-        .clock-wrapper {
+        #md_clock .clock-wrapper {
             position: absolute;
             top: 50%;
             right: 0;
@@ -120,7 +118,7 @@
 
         }
 
-        .clock-base {
+        #md_clock .clock-base {
             width: 250px;
             height: 250px;
             border-radius: 100%;
@@ -128,7 +126,7 @@
             border: 6px solid #fff;
         }
 
-        .click-indicator {
+        #md_clock .click-indicator {
             position: absolute;
             z-index: 1;
             top: 15px;
@@ -137,7 +135,7 @@
             height: 230px;
         }
 
-        .click-indicator div {
+        #md_clock .click-indicator div {
             position: absolute;
             width: 8px;
             height: 4px;
@@ -145,59 +143,59 @@
             background-color: #fff;
         }
 
-        .click-indicator div:nth-child(1) {
+        #md_clock .click-indicator div:nth-child(1) {
             transform: rotate(30deg) translateY(-113px);
         }
 
-        .click-indicator div:nth-child(2) {
+        #md_clock .click-indicator div:nth-child(2) {
             transform: rotate(60deg) translateY(-113px);
         }
 
-        .click-indicator div:nth-child(3) {
+        #md_clock .click-indicator div:nth-child(3) {
             transform: rotate(90deg) translateY(-113px);
             background-color: #aaa;
         }
 
-        .click-indicator div:nth-child(4) {
+        #md_clock .click-indicator div:nth-child(4) {
             transform: rotate(120deg) translateY(-113px);
         }
 
-        .click-indicator div:nth-child(5) {
+        #md_clock .click-indicator div:nth-child(5) {
             transform: rotate(150deg) translateY(-113px);
         }
 
-        .click-indicator div:nth-child(6) {
+        #md_clock .click-indicator div:nth-child(6) {
             transform: rotate(180deg) translateY(-113px);
             background-color: #fff;
         }
 
-        .click-indicator div:nth-child(7) {
+        #md_clock .click-indicator div:nth-child(7) {
             transform: rotate(210deg) translateY(-113px);
         }
 
-        .click-indicator div:nth-child(8) {
+        #md_clock .click-indicator div:nth-child(8) {
             transform: rotate(240deg) translateY(-113px);
         }
 
-        .click-indicator div:nth-child(9) {
+        #md_clock .click-indicator div:nth-child(9) {
             transform: rotate(270deg) translateY(-113px);
             background-color: #fff;
         }
 
-        .click-indicator div:nth-child(10) {
+        #md_clock .click-indicator div:nth-child(10) {
             transform: rotate(300deg) translateY(-113px);
         }
 
-        .click-indicator div:nth-child(11) {
+        #md_clock .click-indicator div:nth-child(11) {
             transform: rotate(330deg) translateY(-113px);
         }
 
-        .click-indicator div:nth-child(12) {
+        #md_clock .click-indicator div:nth-child(12) {
             transform: rotate(360deg) translateY(-113px);
             background-color: #c00;
         }
 
-        .clock-hour {
+        #md_clock .clock-hour {
             position: absolute;
             z-index: 2;
             top: 80px;
@@ -212,7 +210,7 @@
             -moz-animation: rotate-hour 43200s linear infinite;
         }
 
-        .clock-minute {
+        #md_clock .clock-minute {
             position: absolute;
             z-index: 3;
             top: 60px;
@@ -227,7 +225,7 @@
             -moz-animation: rotate-minute 3600s linear infinite;
         }
 
-        .clock-second {
+        #md_clock .clock-second {
             position: absolute;
             z-index: 4;
             top: 20px;
@@ -277,6 +275,11 @@
             right: 0;
             transform: rotate(90deg) translateY(-50%);
             font-size: 1.44em;
+            padding: 0px 14px;
+            background: #fff;
+            color: black;
+            font-weight: bold;
+            border-radius: 6px;
         }
     </style>
 

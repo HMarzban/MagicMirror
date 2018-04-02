@@ -35,9 +35,6 @@
 
            // console.log($cal_module.type);
 
-        
-
-
             const fn_cal_fullyDisplay = () => {
                 
              //console.log($cal.cal[$Currnet_year])
@@ -59,14 +56,7 @@
 
                     $('#md_Jcalendar_full .footer ul').append(` <li class="${val.isHoliday? 'isHoliday ':''}${close === val.text? 'closest':'' }"> `+val.text+` </li> `);
 
-                })
-
-
-
-
-                //console.log(closest($cal.cal[$Currnet_year].event[($Current_month - 1)],parseInt($currnet_day)))
-
-
+                });
 
                 $.each( $cal.cal[$Currnet_year].days[($Current_month - 1)] , function( index, val ) {
                     $('#md_Jcalendar_full .body').append(
@@ -80,8 +70,6 @@
                     );
 
                 });
-
-
 
 
                 //show | scrolle ul to current event.
@@ -114,7 +102,7 @@
     #md_Jcalendar_full > .body > div .miladi{float: right;font-family: sans-serif;}
     #md_Jcalendar_full > .body > div .qamari{float: left;}
 
-    #md_Jcalendar_full > .body > div.today{transform: scale(1.4);background: black;z-index: 5;}
+    #md_Jcalendar_full > .body > div.today{border-radius: 6px;transform: scale(1.4);background: #fff;z-index: 5;font-weight: bolder;color:#fff;}
     #md_Jcalendar_full > .body > div.disabled{opacity: .5;}
     #md_Jcalendar_full > .body > div.holiday::after{
         content: '';display: block;
