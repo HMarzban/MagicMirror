@@ -12,6 +12,15 @@
     "author":"Hossein Marzban",
     "local":"fa",
     "module":[
+   
+        {
+            "name":"news",
+            "display_title":"khabarPo news",
+            "position":"bottom_center",
+            "display_src":{
+                "html":"module/news/md_news.html"
+            }
+        },
         {
             "name":"clock",
             "display_title":"local analog clock",
@@ -27,18 +36,9 @@
             }
         },
         {
-            "name":"calendar",
-            "display_title":"Calendar Jalali",
-            "position":"top_left",
-            "type":"full",
-            "display_src":{
-                "html":"module/calendar/md_calendar.html"
-            }
-        },
-        {
             "name":"weather",
             "display_title":"Current weather data",
-            "position":"bottom_right",
+            "position":"top_left",
             "default_config":{
                 "api_key":"5848c036c74d7d5a41822f115543e161",
                 "city_name":"Tehran",
@@ -60,6 +60,7 @@
             }
 
         }
+        
 
 
     ]

@@ -10,18 +10,102 @@
                     data: $config
                 }).value;
 
+                $this.append(`<div class="nd_online"></div><div class="ho_news"><div>`)
 
-                /*$.get("http://khabarpu.com/file/kp2/sort_newsagency/latest/newsagency.htm?_=1522680257578",function(_data){
-                    console.log(_data)
-                })*/
+                $.get("http://khabarpu.com/file/kp2/sort_newsagency/latest/newsagency.htm?_="+moment().valueOf(),function(_data){
+                    $this.find('.ho_news').html(_data)
+                    $this.find('.ho_news').addClass('ho_news_active')
+
+                    fn_link_abandon();
+                })
+                
+                const fn_link_abandon = function (){
+                    $this.find('a').on('click',function(e){
+                        e.preventDefault();
+                    })
+                }
+                
 
                 
                     
             };// $.fn.md_news
 
         }( jQuery ));  
+
+        $('#md_news').md_news();
         
     </script>
-    <style></style>
+    <style>
+
+       
+
+        #md_news{
+            direction: rtl;text-align: right;padding:0 10px;height: 120px;overflow: hidden;
+            width: 60vw;border-radius: 10px;position: relative;
+        }
+
+        
+        #md_news::before{
+            content:'';width: 100%;height: 50px;position: absolute;top: 0;
+            background: linear-gradient(rgba(0,0,0,1),transparent);z-index: 2;
+        }
+
+        #md_news::after{
+            content:'';width: 100%;height: 50px;position: absolute;bottom: 0;
+            background: linear-gradient(transparent,rgba(0,0,0,1));z-index: 2;
+        }
+
+         .nd_online{
+            width: 16px;height: 16px;z-index: 5;
+            background-color: red;border-radius: 100%;position: absolute;
+            top:0%;left: 0%;transition: all .3s;animation:online_dot 1.2s ease-in-out infinite;
+        }
+
+        @keyframes online_dot {
+            0% {opacity: 0;}
+            50% {opacity: 1;}
+            100%{opacity: 0;}
+        }
+
+        #md_news ul {list-style-type: none;color:#fff;}
+        #md_news ul li a{color:#fff;text-decoration: none;font-size: 1.11em;font-weight: bold;}
+
+        .ho_news > div > .stitle::before{
+            content: "\f1ea";
+            display: inline-block;
+            font: normal normal normal 14px/1 FontAwesome;
+            font-size: inherit;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            margin-left: 10px;
+
+        }
+        /**/
+        .ho_news > div{margin-bottom: 8px;overflow: auto;}
+        .ho_news > div ul{
+            float:right;clear: both;
+            width: 100%;margin: 0;
+            padding: 0
+        }
+        .ho_news > div > .stitle{
+            float:  right;font-size: .86em;font-weight: 500;
+        }
+        .ho_news > div > .ntime{
+            float: left;font-size: .86em;font-weight: 500;
+        }
+        /**/
+    
+        .ho_news_active{
+            transition: all .3s;
+            animation: auto_scrol 360s linear;
+        }
+
+        @keyframes auto_scrol {
+            frome {transform: translateY(0%)}
+            to{transform: translateY(-100%)}
+        }
+    
+    </style>
     <div id="md_news"></div>
 </section>
