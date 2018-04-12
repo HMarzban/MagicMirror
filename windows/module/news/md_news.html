@@ -14,28 +14,53 @@
 
                 $this.append(`<div class="nd_online"></div><div class="ho_news"><div>`);
 
-                $.get("http://khabarpu.com/file/kp2/sort_newsagency/latest/newsagency.htm?_="+moment().valueOf(),function(_data){
+                let fn_news_relaod = function(){
+                    //if($weather_module.default_config.refresh_time.worke){
+                        let i = $news_module.refresh_time || 60000;
+                        console.log(i)
+                        let md_news_relaod = setInterval(function() {
+                            //i = i - 1;
+                            //console.log(i)
+                            //$this.find('.footer .timer').text(i)
+                            //if (i <= 0) {
+                                // get new data
+                                fn_news_init();
+                                clearInterval(md_news_relaod);
+                            //}
+                        },i);// setInterval
+                    //}//worke or not
+                } 
+
+                const fn_news_init = function(){
+
+                    $.get("http://khabarpu.com/file/kp2/sort_newsagency/latest/newsagency.htm?_="+moment().valueOf(),function(_data){
                     $this.find('.ho_news').html(_data);
                     
-                    if( $typeShow == "scroll" )
-                        $this.addClass('md_news_scroll').find('.ho_news').addClass('ho_news_active');
-                    else
-                        $this.addClass('md_news_fade');
+                        if( $typeShow == "scroll" )
+                            $this.addClass('md_news_scroll').find('.ho_news').addClass('ho_news_active');
+                        else
+                            $this.addClass('md_news_fade');
 
-                    if($typeShow == "fade" )
-                        fn_face_animation()
+                        if($typeShow == "fade" )
+                            fn_fade_animation()
 
-                    //preventDefault ahref tag in develope mode
-                    fn_link_abandon();
-                })
-                
+                        //preventDefault ahref tag in develope mode
+                        fn_link_abandon();
+
+                        fn_news_relaod();
+                    }); //http get
+
+                    
+
+                }
+
                 const fn_link_abandon = function (){
                     $this.find('a').on('click',function(e){
                         e.preventDefault();
                     })
                 }
 
-                const fn_face_animation = function(){
+                const fn_fade_animation = function(){
                     let array = [];
                     let index = 0;
                     $( '.ho_news > div' ).each(function(index,val){
@@ -53,7 +78,7 @@
                     },6000)
                 }
                 
-                
+                fn_news_init();
                 
                     
             };// $.fn.md_news

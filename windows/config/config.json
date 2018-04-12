@@ -17,6 +17,7 @@
             "name":"news",
             "display_title":"khabarPo news",
             "position":"bottom_center",
+            "refresh_time":60000,
             "show":"fade",
             "display_src":{
                 "html":"module/news/md_news.html"
