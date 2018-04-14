@@ -12,6 +12,8 @@
 
                 const $typeShow = $news_module.show || "scroll";
 
+                let fade_time ="";
+
                 $this.append(`<div class="nd_online"></div><div class="ho_news"><div>`);
 
                 let fn_news_relaod = function(){
@@ -26,6 +28,7 @@
                                 // get new data
                                 fn_news_init();
                                 clearInterval(md_news_relaod);
+                                clearInterval(fade_time);
                             //}
                         },i);// setInterval
                     //}//worke or not
@@ -48,6 +51,9 @@
                         fn_link_abandon();
 
                         fn_news_relaod();
+                    }).fail(function() {
+                        // if faild try load again
+                        fn_news_init();
                     }); //http get
 
                     
@@ -70,7 +76,7 @@
 
                     $('.ho_news').hide().delay(400).html(array[0]).fadeIn('slow');
                     index = 1;
-                    setInterval(function(){
+                    fade_time = setInterval(function(){
                         $('.ho_news').fadeOut('slow',function(){
                             $('.ho_news').html(array[index]).fadeIn()
                         });

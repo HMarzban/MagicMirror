@@ -1,17 +1,19 @@
-
-
-
-
-
-
-
-
 {
     "project":"magic miror",
     "version":"1.0.0",
     "author":"Hossein Marzban",
     "local":"fa",
+    "zoom":"1",
     "module":[
+        {
+            "name":"calendar",
+            "display_title":"Calendar Jalali",
+            "position":"top_left",
+            "type":"full",
+            "display_src":{
+                "html":"module/calendar/md_calendar.html"
+            }
+        },
    
         {
             "name":"news",
@@ -23,24 +25,11 @@
                 "html":"module/news/md_news.html"
             }
         },
-        {
-            "name":"clock",
-            "display_title":"local analog clock",
-            "position":"top_right",
-            "type": "digital",
-            "digital_conf":{
-                "time_format":"H:mm",
-                "showDate":false,
-                "date_format":"  YYYY.D.MMMM"
-            },
-            "display_src":{
-                "html":"module/clock/md_clock.html"
-            }
-        },
+      
         {
             "name":"weather",
             "display_title":"Current weather data",
-            "position":"top_left",
+            "position":"top_right",
             "default_config":{
                 "api_key":"5848c036c74d7d5a41822f115543e161",
                 "city_name":"Tehran",
@@ -61,6 +50,20 @@
                 "html":"module/weather/md_weather.html"
             }
 
+        },
+        {
+            "name":"clock",
+            "display_title":"local analog clock",
+            "position":"top_right",
+            "type": "digital",
+            "digital_conf":{
+                "time_format":"H:mm",
+                "showDate":false,
+                "date_format":"  YYYY.D.MMMM"
+            },
+            "display_src":{
+                "html":"module/clock/md_clock.html"
+            }
         }
         
 

@@ -10,6 +10,11 @@ moment.locale( $config.local || 'fa' );
 
 $(function() {
 
+
+        $('body main').css({"zoom":$config.zoom});
+
+
+
         $.each( $config.module , function( key, module ) {
 
             //TODO: load css & js file of module :(?)

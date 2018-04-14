@@ -63,12 +63,13 @@
                         </div><!--bot-->
                     </div><!--lay_tree-->
                     <div class="footer ${$weather_module.default_config.refresh_time.worke ? '':'nd_display_hide'}"> <span class="timer ${$weather_module.default_config.refresh_time.showTimer ? '':'nd_display_hide'}"></span> <i class="wi wi-refresh"></i> </div><!--footer-->
-                `);
+                `)
 
                     fn_weather_relaod();
                 })
                 .fail(function() {
-                    
+                    // if faild try load again
+                    fn_weather_init();
                 });
             }// fn_weather_init
             
