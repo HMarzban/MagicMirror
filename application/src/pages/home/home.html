@@ -1,0 +1,96 @@
+<ion-header>
+  <!-- <ion-navbar>
+    <ion-title>Home</ion-title>
+  </ion-navbar> -->
+  
+
+</ion-header>
+
+<ion-content padding>
+
+    <ion-chip #chip3>
+        <ion-avatar>
+          <img src="../../assets/imgs/avatar.jpg">
+        </ion-avatar>
+        <ion-label>Hossein Marzban</ion-label>
+        <button ion-button clear color="dark" (click)="delete(chip3)">
+          <ion-icon name="md-log-out"></ion-icon>
+        </button>
+      </ion-chip>
+
+
+      <style>
+      
+        .MirroMap{
+          width: 100%;height: auto;border: 3px solid #6a6a6a;border-radius: 6px;
+          margin-top: 80px;padding:6px;overflow: hidden;
+          }
+
+        .MirroMap .top,.MirroMap .bot{
+          width: 20%;margin: 1%;height: 30px;background-color: #eee;border-radius: 4px;float: left;
+          cursor: pointer;
+        }
+        .MirroMap .top.atrCenter,.MirroMap .bot.atrCenter{width: 54%;}
+          
+        .MirroMap .bot{
+          margin-top: 60px;
+        }
+
+        .MirroMap .top:hover,.MirroMap .bot:hover{background-color: #ddd;}
+      </style>
+
+      <div class="MirroMap">
+
+        <div class="top atrLeft"   (click)="openModal('top_left')"></div>
+        <div class="top atrCenter" (click)="openModal('top_center')"></div>
+        <div class="top atrRight"  (click)="openModal('top_right')"></div>
+
+
+        <div class="bot atrLeft"   (click)="openModal('bottom_left')"></div>
+        <div class="bot atrCenter" (click)="openModal('bottom_center')"></div>
+        <div class="bot atrRight"  (click)="openModal('bottom_right')"></div>
+
+      </div>
+
+
+      <ion-list>
+
+          <ion-item>
+            <ion-label>Pepperoni</ion-label>
+            <ion-toggle></ion-toggle>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Module</ion-label>
+            <ion-select>
+              <ion-option value="f">Calendar</ion-option>
+              <ion-option value="m">News</ion-option>
+              <ion-option value="m">Weather</ion-option>
+              <ion-option value="m">Clock</ion-option>
+            </ion-select>
+          </ion-item>
+
+      </ion-list>
+
+
+      <div padding>
+          <button ion-button block (click)="openBasicModal()">send delate to server</button>
+        </div>
+
+      <div padding>
+        <button ion-button block color="danger" (click)="openModalWithParams()">Open with Parameters</button>
+      </div>
+
+
+
+
+  <!-- <h2>Welcome to Ionic!</h2>
+  <p>
+    This starter project comes with simple tabs-based layout for apps
+    that are going to primarily use a Tabbed UI.
+  </p>
+  <p>
+    Take a look at the <code>src/pages/</code> directory to add or change tabs,
+    update any existing page or create new pages.
+  </p> -->
+</ion-content>

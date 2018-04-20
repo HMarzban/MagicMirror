@@ -1,7 +1,30 @@
 
 
 
-
+ {
+            "_id": 4,
+            "moduleName": "news",
+            "postion": "top_right",
+            "visibility": true
+        },
+        {
+            "_id": 5,
+            "moduleName": "news",
+            "postion": "top_right",
+            "visibility": false
+        },
+        {
+            "_id": 6,
+            "moduleName": "news",
+            "postion": "top_right",
+            "visibility": true
+        },
+        {
+            "_id": 7,
+            "moduleName": "news",
+            "postion": "top_center",
+            "visibility": false
+        }
 
 
 

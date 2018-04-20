@@ -1,0 +1,24 @@
+page-module-chose {
+    .tabbar{
+        opacity: 1!important;
+    }
+}
+
+body.ios {
+  .tab-button {
+    &[aria-selected="false"] {
+      color: #8c8c8c !important;
+    }
+    &[aria-selected="true"] {
+      color: #f53d3d !important;
+    }
+  }
+}
+
+.moduleCarde {
+     animation-delay:.2s;
+     .view_gray{
+        color: #aaa;
+     }
+}
+
