@@ -1,110 +1,13 @@
 <section class="module md_clock">
+    <div class="md_clock"></div>
 
-    <script>
+</section>
 
-        (function ($) {
-
-            $.fn.md_clock = function () {
-
-                const $this = this;
-
-                const $clock_module = jsonQuery('module[name=clock]', {
-                    data: $config
-                }).value;
-
-
-                let fn_clock_init = function () {
-                    if ($clock_module.type == "analog") {
-
-                        $this.html.html(`
-                                    <style id="clock-animations"></style>
-                                    <div class="clock-wrapper">
-                                        <div class="clock-base">
-                                            <div class="click-indicator">
-                                                <div></div>
-                                                <div></div>
-                                                <div></div>
-                                                <div></div>
-                                                <div></div>
-                                                <div></div>
-                                                <div></div>
-                                                <div></div>
-                                                <div></div>
-                                                <div></div>
-                                                <div></div>
-                                                <div></div>
-                                            </div>
-                                            <div class="clock-hour"></div>
-                                            <div class="clock-minute"></div>
-                                            <div class="clock-second"></div>
-                                        </div>
-                                    </div>
-                                `).css({ 'width': '300px', 'height': '300px' });
-
-                        //generate clock animations use GPU
-                        var now = new Date(),
-                            hourDeg = now.getHours() / 12 * 360 + now.getMinutes() / 60 * 30,
-                            minuteDeg = now.getMinutes() / 60 * 360 + now.getSeconds() / 60 * 6,
-                            secondDeg = now.getSeconds() / 60 * 360,
-                            stylesDeg = [
-                                "@-webkit-keyframes rotate-hour{from{transform:rotate(" + hourDeg + "deg);}to{transform:rotate(" + (hourDeg + 360) + "deg);}}",
-                                "@-webkit-keyframes rotate-minute{from{transform:rotate(" + minuteDeg + "deg);}to{transform:rotate(" + (minuteDeg + 360) + "deg);}}",
-                                "@-webkit-keyframes rotate-second{from{transform:rotate(" + secondDeg + "deg);}to{transform:rotate(" + (secondDeg + 360) + "deg);}}",
-                                "@-moz-keyframes rotate-hour{from{transform:rotate(" + hourDeg + "deg);}to{transform:rotate(" + (hourDeg + 360) + "deg);}}",
-                                "@-moz-keyframes rotate-minute{from{transform:rotate(" + minuteDeg + "deg);}to{transform:rotate(" + (minuteDeg + 360) + "deg);}}",
-                                "@-moz-keyframes rotate-second{from{transform:rotate(" + secondDeg + "deg);}to{transform:rotate(" + (secondDeg + 360) + "deg);}}"
-                            ].join("");
-                        $this.find("#clock-animations").html(stylesDeg);
-                    } else if ($clock_module.type == "digital") {
-
-                        $this.html(`
-                                    <div class="digital">
-                                        <div class="timer"></div>
-                                        <div class="date"></div>
-                                        <div class="dayWeek"></div>
-                                    </div>
-                                `);
-
-
-
-                        function update() {
-                            //'D. MMMM YYYY H:mm:ss'
-                            $this.find('.digital .timer').html(moment().format($clock_module.digital_conf.time_format));
-                            $this.find('.digital .date').html(moment().format($clock_module.digital_conf.date_format))
-                            $this.find('.digital .dayWeek').html(moment().format('dddd'))
-                            //console.log(moment().format('D. MMMM YYYY H:mm:ss'))
-                        }
-
-                        setInterval(update, 1000);
-
-                    }
-
-                }//fn_clock_init
-
-                fn_clock_init();
-
-            };// $.fn.md_clock
-
-        }(jQuery));
-
-
-
-        $('#md_clock').md_clock();
-
-
-    </script>
-
-    <div id="md_clock"></div>
-
-
-
-
-    <style>
-        #md_clock {
+<style>
+        .md_clock {
             position: relative;
         }
-
-        #md_clock .clock-wrapper {
+        .md_clock .clock-wrapper {
             position: absolute;
             top: 50%;
             right: 0;
@@ -115,18 +18,15 @@
             margin: auto;
             padding: 5px;
             border-radius: 100%;
-
         }
-
-        #md_clock .clock-base {
+        .md_clock .clock-base {
             width: 250px;
             height: 250px;
             border-radius: 100%;
             box-shadow: 0 0 5px #eee;
             border: 6px solid #fff;
         }
-
-        #md_clock .click-indicator {
+        .md_clock .click-indicator {
             position: absolute;
             z-index: 1;
             top: 15px;
@@ -134,68 +34,54 @@
             width: 230px;
             height: 230px;
         }
-
-        #md_clock .click-indicator div {
+        .md_clock .click-indicator div {
             position: absolute;
             width: 8px;
             height: 4px;
             margin: 113px 114px;
             background-color: #fff;
         }
-
-        #md_clock .click-indicator div:nth-child(1) {
+        .md_clock .click-indicator div:nth-child(1) {
             transform: rotate(30deg) translateY(-113px);
         }
-
-        #md_clock .click-indicator div:nth-child(2) {
+        .md_clock .click-indicator div:nth-child(2) {
             transform: rotate(60deg) translateY(-113px);
         }
-
-        #md_clock .click-indicator div:nth-child(3) {
+        .md_clock .click-indicator div:nth-child(3) {
             transform: rotate(90deg) translateY(-113px);
             background-color: #aaa;
         }
-
-        #md_clock .click-indicator div:nth-child(4) {
+        .md_clock .click-indicator div:nth-child(4) {
             transform: rotate(120deg) translateY(-113px);
         }
-
-        #md_clock .click-indicator div:nth-child(5) {
+        .md_clock .click-indicator div:nth-child(5) {
             transform: rotate(150deg) translateY(-113px);
         }
-
-        #md_clock .click-indicator div:nth-child(6) {
+        .md_clock .click-indicator div:nth-child(6) {
             transform: rotate(180deg) translateY(-113px);
             background-color: #fff;
         }
-
-        #md_clock .click-indicator div:nth-child(7) {
+        .md_clock .click-indicator div:nth-child(7) {
             transform: rotate(210deg) translateY(-113px);
         }
-
-        #md_clock .click-indicator div:nth-child(8) {
+        .md_clock .click-indicator div:nth-child(8) {
             transform: rotate(240deg) translateY(-113px);
         }
-
-        #md_clock .click-indicator div:nth-child(9) {
+        .md_clock .click-indicator div:nth-child(9) {
             transform: rotate(270deg) translateY(-113px);
             background-color: #fff;
         }
-
-        #md_clock .click-indicator div:nth-child(10) {
+        .md_clock .click-indicator div:nth-child(10) {
             transform: rotate(300deg) translateY(-113px);
         }
-
-        #md_clock .click-indicator div:nth-child(11) {
+        .md_clock .click-indicator div:nth-child(11) {
             transform: rotate(330deg) translateY(-113px);
         }
-
-        #md_clock .click-indicator div:nth-child(12) {
+        .md_clock .click-indicator div:nth-child(12) {
             transform: rotate(360deg) translateY(-113px);
             background-color: #c00;
         }
-
-        #md_clock .clock-hour {
+        .md_clock .clock-hour {
             position: absolute;
             z-index: 2;
             top: 80px;
@@ -209,8 +95,7 @@
             -webkit-animation: rotate-hour 43200s linear infinite;
             -moz-animation: rotate-hour 43200s linear infinite;
         }
-
-        #md_clock .clock-minute {
+        .md_clock .clock-minute {
             position: absolute;
             z-index: 3;
             top: 60px;
@@ -224,8 +109,7 @@
             -webkit-animation: rotate-minute 3600s linear infinite;
             -moz-animation: rotate-minute 3600s linear infinite;
         }
-
-        #md_clock .clock-second {
+        .md_clock .clock-second {
             position: absolute;
             z-index: 4;
             top: 20px;
@@ -239,7 +123,6 @@
             -webkit-animation: rotate-second 60s linear infinite;
             -moz-animation: rotate-second 60s linear infinite;
         }
-
         /*.clock-second:after {
             content: "";
             display: block;
@@ -253,23 +136,19 @@
             border-radius: 50%;
             box-shadow: 0 0 3px rgba(0, 0, 0, .2);
         }*/
-
-        #md_clock .digital {
+        .md_clock .digital {
             width: 280px;
             text-align: left;
             padding: 10px 20px
         }
-
-        #md_clock .digital .timer {
+        .md_clock .digital .timer {
             font-size: 4.66em
         }
-
-        #md_clock .digital .date {
+        .md_clock .digital .date {
             margin-top: -34px;
             font-size: 1.1em;
         }
-
-        #md_clock .digital .dayWeek {
+        .md_clock .digital .dayWeek {
             position: absolute;
             top: 50%;
             right: 0;
@@ -282,7 +161,3 @@
             border-radius: 6px;
         }
     </style>
-
-
-
-</section>

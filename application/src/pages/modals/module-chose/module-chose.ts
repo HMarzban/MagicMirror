@@ -16,7 +16,8 @@ import 'rxjs/add/operator/map';
 })
 export class ModuleChosePage {
 
-  isAndroid: boolean = false;
+  public isAndroid: boolean = false;
+  public qtd = {};
 
   public moduleList = [];
   public moduleChose = [];
@@ -45,20 +46,34 @@ export class ModuleChosePage {
   }
 
   dismiss() {
-    let data = { 'foo': this.moduleChose };
+    let data = this.qtd;
     this.viewCtrl.dismiss(data);
   }
 
 
   moduleChoseChanged(){
+
+   
+    let ngModle = {}
+
     let  index = this.moduleList.findIndex(el => el.name==this.moduleChose);
     this.t1 = this.moduleList[index]
+
+      this.t1['setting'].forEach(function(val, index){
+        if(val.inputType != 'divided')
+          ngModle[val.name] = Array.isArray(val.value) || val.inputType == 'boolean' ?  val.defualt :  val.value   ;
+      });
+      
+
+    //FIXME:check without setTimeout
+    setTimeout(() => {
+      this.qtd = ngModle;
+      console.log(this.qtd)
+    },100);
+
   }
 
 
-  btn_addNweModule(){
-    console.log("akjsdlkja")
-  }
 
   btn_delateModule(_module){
       let alert = this.alertCtrl.create({
@@ -118,7 +133,70 @@ export class ModuleChosePage {
               this.moduleAppend = [];
               this.moduleAppend = data['moduleList']
             }, 1000);
-          
+          }
+        },err => {
+          //toast_error.present();
+          console.log(err)
+        }
+    );
+  }//btn_visibilityChange
+
+  btn_addNweModule(){
+
+
+    console.log(this.t1)
+    this.t1.forEach(function(val,index){
+      console.log(val)
+      console.log(index)
+    })
+
+
+
+
+    console.log("akjsdlkja")
+
+    $('.box_empty').addClass('animated fadeOut')
+    $('.btn_addNewModule').addClass('animated zoomOutDown')
+    $('.box_list_cardModule').addClass('animated zoomOutUp')
+
+    setTimeout(() => {
+      $('.box_list_cardModule,.box_empty ').hide()
+      $('.box_addModule').fadeIn()
+    }, 1000);
+
+
+  }//btn_addNweModule
+
+
+
+  btn_addConfToLocation(_conf){
+
+
+    this.qtd["moduleName"] = this.moduleChose;
+    this.qtd["postion"] = this.navParams.get('Param').location;
+    this.qtd["visibility"] = true;
+
+
+    //$('.moduleCarde').removeClass('animated  flipInX ').addClass('animated  flipOutX')
+    this.http.post('http://localhost:3000/addModule', { "module" : this.qtd,'location':this.navParams.get('Param').location }).map(res => res.json()).subscribe(
+        data => {
+          console.log(data)
+          if(data["is"]){
+            //for animation
+            console.log(data["msg"]);
+            console.log(this.qtd);
+
+            this.moduleAppend = [];
+            this.moduleAppend = data['moduleList']
+            this.t1 = [];
+            this.qtd = [];
+
+            $('.box_addModule').fadeOut('fast',function(){
+              $('.box_list_cardModule').show()
+              $('.btn_addNewModule,.box_list_cardModule').removeClass('animated zoomOutDown zoomOutUp')
+              $('.btn_addNewModule,.box_list_cardModule').addClass('animated zoomInDown')
+            })
+
           }
         },err => {
           //toast_error.present();
@@ -127,7 +205,9 @@ export class ModuleChosePage {
     );
 
 
+    
   }
+
 
 }
 

@@ -89,7 +89,7 @@ export class HomePage {
 
         
         },err => {
-          this.toast_error.present();
+          //this.toast_error.present();
         }
     );
   }

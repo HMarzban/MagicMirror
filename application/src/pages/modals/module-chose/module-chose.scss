@@ -2,6 +2,12 @@ page-module-chose {
     .tabbar{
         opacity: 1!important;
     }
+    .nd_divdedHeader{
+      font-weight: bold;
+      font-size: 1.11em;
+      padding-bottom: 4px;
+      border-bottom: 2px solid orangered;
+    }
 }
 
 body.ios {
