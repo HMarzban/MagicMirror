@@ -1,35 +1,36 @@
 
-(function ( $ ) {
+$.fn.md_weather = function (options) {
 
-    $.fn.md_weather = function() {
-      
-        const $this = this;
-        const ModuleID = $this.parent().attr('class').split(' ').filter(s => s.includes('ID_'));
-        const $weather_module = modul_configList[ModuleID];
+    let defaults = { id: "" };
+    let $settings = $.extend({}, defaults, options);
+    if ($settings.id == "")
+        throw new moduleError('ID is not defind', "weather", ln().end, ln().start);
+    const $this = this;
+    const $weather_module = modul_configList[$settings.id];
 
-        let fn_weather_relaod = function(){
-            if($weather_module.worke){
-                let i = $weather_module.time || 30;
-                let md_weather_relaod = setInterval(function() {
-                    i = i - 1;
-                    //console.log(i)
-                    $this.find('.footer .timer').text(i)
-                    if (i <= 0) {
-                        // get new data
-                        fn_weather_init();
-                        clearInterval(md_weather_relaod);
-                    }
-                },1000);// setInterval
-            }//worke or not
-        }
+    let fn_weather_relaod = function () {
+        if ($weather_module.worke) {
+            let i = $weather_module.time || 30;
+            let md_weather_relaod = setInterval(function () {
+                i = i - 1;
+                //console.log(i)
+                $this.find('.footer .timer').text(i)
+                if (i <= 0) {
+                    // get new data
+                    fn_weather_init();
+                    clearInterval(md_weather_relaod);
+                }
+            }, 1000);// setInterval
+        }//worke or not
+    }
 
 
-        let fn_weather_init = function(){
-            //TODO: set spinner for loading
-            $.ajax( "http://api.openweathermap.org/data/2.5/weather?q="+$weather_module.city_name+"&units=metric&lang=fa&appid="+$weather_module.api_key )
-            .done(function(res) {
-            $this.html(`
-                <div class="header ${$weather_module.showHeader ? '':'nd_display_hide'} ">
+    let fn_weather_init = function () {
+        //TODO: set spinner for loading
+        $.ajax("http://api.openweathermap.org/data/2.5/weather?q=" + $weather_module.city_name + "&units=metric&lang=fa&appid=" + $weather_module.api_key)
+            .done(function (res) {
+                $this.html(`
+                <div class="header ${$weather_module.showHeader ? '' : 'nd_display_hide'} ">
                         <div class="cityName">${$weather_module.cityName}</div>
                         <div class="waDec">${res.weather[0].description}</div>   
                 </div>
@@ -37,7 +38,7 @@
                     <div class="top"></div><!--top-->
                     <div class="mid">
                         <div class="icon"><i class="wi wi-owm-day-${res.weather[0].id}"></i></div> 
-                        <div class="temp"><i class="wi wi-celsius"></i> ${parseInt( res.main.temp )} <i class="wi wi-wind from-${res.wind.deg}-deg"></i> </div>
+                        <div class="temp"><i class="wi wi-celsius"></i> ${parseInt(res.main.temp)} <i class="wi wi-wind from-${res.wind.deg}-deg"></i> </div>
                     </div><!--mid-->
                     <div class="bot">
                         <div>
@@ -50,32 +51,28 @@
                         </div>
                         <div>
                             <div class="wind"> 
-                                    ${res.wind.speed } <i class="wi wi-wind-beaufort-${ parseInt( res.wind.speed )}"></i>
+                                    ${res.wind.speed} <i class="wi wi-wind-beaufort-${parseInt(res.wind.speed)}"></i>
                             </div>
                             <div class="humidity">  ${res.main.humidity} <i class="wi wi-humidity"></i> </div>
                         </div>
                     </div><!--bot-->
                 </div><!--lay_tree-->
-                <div class="footer ${$weather_module.worke ? '':'nd_display_hide'}"> <span class="timer ${$weather_module.showTimer ? '':'nd_display_hide'}"></span> <i class="wi wi-refresh"></i> </div><!--footer-->
+                <div class="footer ${$weather_module.worke ? '' : 'nd_display_hide'}"> <span class="timer ${$weather_module.showTimer ? '' : 'nd_display_hide'}"></span> <i class="wi wi-refresh"></i> </div><!--footer-->
             `)
 
                 fn_weather_relaod();
             })
-            .fail(function() {
+            .fail(function () {
                 // if faild try load again
                 fn_weather_init();
             });
-        }// fn_weather_init
-        
-        //fire firstr time
-        fn_weather_init();
+    }// fn_weather_init
+    //fire firstr time
+    fn_weather_init();
+};//$.fn.md_weather
 
-
-    };//
-
-    $('#md_weather').md_weather();
-    
-}( jQuery ));  
+//initialize module 
+$(moduleBase.position + " ." + moduleBase.id).md_weather({ id: moduleBase.id });
 
 
 

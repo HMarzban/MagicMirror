@@ -1,166 +1,65 @@
-
-
 <section class="module md_calendar">
+    <div class="md_Jcalendar_full">
+        <div class="head">
+            <div class="dates"></div>
+            <div class="days">
+                <div>ش</div>
+                <div>ی</div>
+                <div>د</div>
+                <div>س</div>
+                <div>چ</div>
+                <div>پ</div>
+                <div>ج</div>
+            </div>
+        </div>
+        <div class="body"></div><!--body-->
+        <div class="footer"><ul></ul></div><!--footer-->
+    </div>
+</section>
 
-        <script>
-            
-            //FIXME: we have problem and doesnot show exact closest on
-            function closest(array,num){
-                var i=0;
-                var minDiff=array.length;
-                var ans;
-                for(i in array){
-                    var m=Math.abs(num-i)
-                    if(m<minDiff){ 
-                            minDiff=m; 
-                            ans=array[i]; 
-                        }
-                }
-                return ans;
-            }
-
-            const $cal = require(path.join(__dirname,'module/calendar/api_calendar.json'));
-            let $currnet_day = moment().format('D') ;
-            let $Current_month = moment().format('M') ;
-            let $Currnet_year = moment().format('YYYY') ;
-
-
-            //console.log($config)
-
-            jsonQuery
-
-           const $cal_module = jsonQuery('module[name=calendar]', {
-             data: $config
-            }).value;
-
-           // console.log($cal_module.type);
-
-            const fn_cal_fullyDisplay = () => {
-                
-             //console.log($cal.cal[$Currnet_year])
-
-
-                $('#md_Jcalendar_full .head .dates').html(
-                    `
-                    <div class="jalali">${$cal.cal[$Currnet_year].jalali}</div>
-                    <div class="miladi">${$cal.cal[$Currnet_year].miladi}</div>
-                    <div class="qamari">${$cal.cal[$Currnet_year].qamari}</div>
-                    `
-                );
-
-
-                $.each( $cal.cal[$Currnet_year].event[($Current_month - 1)] , function( index, val ) {
-
-                    //TODO:find way to fix it!
-                    let close =  closest($cal.cal[$Currnet_year].event[($Current_month - 1)],parseInt($currnet_day)).text
-
-                    $('#md_Jcalendar_full .footer ul').append(` <li class="${val.isHoliday? 'isHoliday ':''}${close === val.text? 'closest':'' }"> `+val.text+` </li> `);
-
-                });
-
-                $.each( $cal.cal[$Currnet_year].days[($Current_month - 1)] , function( index, val ) {
-                    $('#md_Jcalendar_full .body').append(
-                        `
-                        <div class="${val.days.j == $currnet_day ? 'today':''}${val.disabled ? 'disabled': '' }${val.holiday ? ' holiday':''}">
-                            <div class="jalali">${val.days.j}</div>
-                            <div class="miladi small">${val.days.m}</div>
-                            <div class="qamari small">${val.days.q}</div>
-                        </div>
-                        `
-                    );
-
-                });
-
-
-                //show | scrolle ul to current event.
-                $($('#md_Jcalendar_full .footer ul').css({"position": "relative" , "top": ( -($('#md_Jcalendar_full .footer .closest').position().top) + 60 ) }));
-
-            }
-
-
-
-            //init Module
-            if($cal_module.type == "full"){
-                fn_cal_fullyDisplay();
-            }
-
-
-        </script>
 
 <style>
 
-    #md_Jcalendar_full{width: 478px;border-bottom:2px solid #fff;overflow: auto;padding: 5px;overflow: hidden;}
-
-    #md_Jcalendar_full > .body > div{
+    .md_Jcalendar_full{width: 478px;border-bottom:2px solid #fff;overflow: auto;padding: 5px;overflow: hidden;}
+    .md_Jcalendar_full > .body > div{
         width:60px;height: 60px;float: right;margin:3px;text-align: center;font-size: 1.4em;
         padding: 2px;position: relative;
         border: 1px solid #fff;background-color: black;
-    
     }
-
-    #md_Jcalendar_full > .body > div .small{font-size: 60%;width: 22px;height: 22px;line-height: 16px;}
-    #md_Jcalendar_full > .body > div .miladi{float: right;font-family: sans-serif;}
-    #md_Jcalendar_full > .body > div .qamari{float: left;}
-
-    #md_Jcalendar_full > .body > div.today{border-radius: 6px;transform: scale(1.4);background: #fff;z-index: 5;font-weight: bolder;color:black;}
-    #md_Jcalendar_full > .body > div.disabled{opacity: .5;}
-    #md_Jcalendar_full > .body > div.holiday::after{
+    .md_Jcalendar_full > .body > div .small{font-size: 60%;width: 22px;height: 22px;line-height: 16px;}
+    .md_Jcalendar_full > .body > div .miladi{float: right;font-family: sans-serif;}
+    .md_Jcalendar_full > .body > div .qamari{float: left;}
+    .md_Jcalendar_full > .body > div.today{border-radius: 6px;transform: scale(1.4);background: #fff;z-index: 5;font-weight: bolder;color:black;}
+    .md_Jcalendar_full > .body > div.disabled{opacity: .5;}
+    .md_Jcalendar_full > .body > div.holiday::after{
         content: '';display: block;
         width: 8px;height: 8px;background-color: red;
         border-radius: 100%;position: absolute;top:4px;left: 4px;
     }
-
     /**/
-    #md_Jcalendar_full > .head .days > div{float: right;width: 60px;text-align: center;margin:3px;}
+    .md_Jcalendar_full > .head .days > div{float: right;width: 60px;text-align: center;margin:3px;}
     /**/
-    #md_Jcalendar_full > .head .dates{border-bottom: 2px solid #fff;width: 100%;text-align: center;font-size: 1.4em;overflow: hidden;}
-    
-    #md_Jcalendar_full > .head .dates .miladi,#md_Jcalendar_full > .head .dates .qamari{
+    .md_Jcalendar_full > .head .dates{border-bottom: 2px solid #fff;width: 100%;text-align: center;font-size: 1.4em;overflow: hidden;}
+    .md_Jcalendar_full > .head .dates .miladi,#md_Jcalendar_full > .head .dates .qamari{
         font-size: 64%;float: right;
     }
-    #md_Jcalendar_full > .head .dates .miladi{font-family: sans-serif;float: left;}
+    .md_Jcalendar_full > .head .dates .miladi{font-family: sans-serif;float: left;}
     /**/
-    #md_Jcalendar_full >.footer{
+    .md_Jcalendar_full >.footer{
         direction: rtl;text-align: right ;float: right;clear: both;height: 120px;overflow: hidden;
         border-top: 2px solid #fff;margin-top: 10px;position: relative;transition: all 2s;padding: 10px;
     }
-
-    #md_Jcalendar_full >.footer::before{
+    .md_Jcalendar_full >.footer::before{
         content:'';width: 100%;height: 40px;position: absolute;top: 0;
         background: linear-gradient(rgba(0,0,0,.9),transparent);z-index: 2;
     }
-    #md_Jcalendar_full >.footer::after{
+    .md_Jcalendar_full >.footer::after{
         content:'';width: 100%;height: 40px;position: absolute;bottom: 0;
         background: linear-gradient(transparent,rgba(0,0,0,.9));z-index: 2;
     }
-
-    #md_Jcalendar_full >.footer ul{list-style-type: none;padding: 0;margin: 0}
+    .md_Jcalendar_full >.footer ul{list-style-type: none;padding: 0;margin: 0}
     /*#md_Jcalendar_full >.footer ul li{opacity: .5;}
     #md_Jcalendar_full >.footer ul li.isHoliday{opacity: 1;}*/
 
 </style>
 
-
-<div id="md_Jcalendar_full">
-    <div class="head">
-        <div class="dates"></div>
-        <div class="days">
-            <div>ش</div>
-            <div>ی</div>
-            <div>د</div>
-            <div>س</div>
-            <div>چ</div>
-            <div>پ</div>
-            <div>ج</div>
-        </div>
-    </div>
-    <div class="body"></div><!--body-->
-    <div class="footer"><ul></ul></div><!--footer-->
-</div>
-
-
-
-
-
-
-</section>

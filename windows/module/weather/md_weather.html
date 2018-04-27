@@ -1,43 +1,32 @@
 <section class="module md_weather">
-
-    <script>
-
-
-    </script>
-    <style>
-
-        #md_weather{
-            padding: 10px;width: 280px;height: auto;overflow: hidden;
-            /*border:3px solid rgba(255,255,255,.5);*/direction: rtl;text-align: right;
-        
-        }
-        #md_weather .header{text-align: center;margin-bottom: 16px;}
-        #md_weather .header .cityName{font-size: 1.6em;font-weight: bold;}
-        /*====*/
-        #md_weather .lay_tree{width: 100%;float: right;}
-
-        #md_weather .lay_tree > div{overflow: hidden;padding: 0 14px;}
-        #md_weather .lay_tree .mid{font-size: 3.44em;font-weight: bolder;position: relative;}
-        #md_weather .lay_tree .mid > div{float: right;position: relative;}
-        #md_weather .lay_tree .mid .icon{float: left;margin-right: 34px;width: 84px;height: 84px;text-align: left;}
-
-        #md_weather .lay_tree .mid .wi-wind{
-            position: absolute;bottom: 0;right: 0;font-size: .3em;
-        }
-        #md_weather .lay_tree  .sunrise,#md_weather .lay_tree  .sunset{
-            float: left;font-size: 1em;text-align: right;clear: both;
-        }
-        #md_weather .lay_tree  .sunrise > p,#md_weather .lay_tree  .sunset > p{
-            min-width: 44px;float: right;margin: 0 6px;
-        }
-
-        #md_weather .lay_tree .bot >div {
-            float:left;margin-right: 20px;
-        }
-        #md_weather .footer{text-align: left}
-    
-    </style>
-
-<div id="md_weather"></div>
-
+    <div class="md_weather"></div>
 </section>
+
+<style>
+    .md_weather{
+        padding: 10px;width: 280px;height: auto;overflow: hidden;
+        /*border:3px solid rgba(255,255,255,.5);*/direction: rtl;text-align: right; 
+    }
+    .md_weather .header{text-align: center;margin-bottom: 16px;}
+    .md_weather .header .cityName{font-size: 1.6em;font-weight: bold;}
+    /*====*/
+    .md_weather .lay_tree{width: 100%;float: right;}
+    .md_weather .lay_tree > div{overflow: hidden;padding: 0 14px;}
+    .md_weather .lay_tree .mid{font-size: 3.44em;font-weight: bolder;position: relative;}
+    .md_weather .lay_tree .mid > div{float: right;position: relative;}
+    .md_weather .lay_tree .mid .icon{float: left;margin-right: 34px;width: 84px;height: 84px;text-align: left;}
+
+    .md_weather .lay_tree .mid .wi-wind{
+        position: absolute;bottom: 0;right: 0;font-size: .3em;
+    }
+    .md_weather .lay_tree  .sunrise,.md_weather .lay_tree  .sunset{
+        float: left;font-size: 1em;text-align: right;clear: both;
+    }
+    .md_weather .lay_tree  .sunrise > p,.md_weather .lay_tree  .sunset > p{
+        min-width: 44px;float: right;margin: 0 6px;
+    }
+    .md_weather .lay_tree .bot >div {
+        float:left;margin-right: 20px;
+    }
+    .md_weather .footer{text-align: left}
+</style>

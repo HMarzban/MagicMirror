@@ -19,6 +19,16 @@
       </ion-chip>
 
 
+
+      <div >
+        <button ion-button block (click)="btn_reloadMirorr()">Reload Mirror</button>
+        <button ion-button block color="danger" (click)="btn_quitMirorr()">Quit Mirror</button>
+     
+      </div>
+
+
+      
+
       <style>
       
         .MirroMap{
@@ -75,7 +85,7 @@
 
       <div padding>
           <button ion-button block (click)="openBasicModal()">send delate to server</button>
-        </div>
+      </div>
 
       <div padding>
         <button ion-button block color="danger" (click)="openModalWithParams()">Open with Parameters</button>

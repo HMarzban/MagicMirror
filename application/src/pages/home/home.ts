@@ -49,8 +49,28 @@ export class HomePage {
   }
 
 
+  
+  btn_quitMirorr(){
+    this.http.get('http://localhost:3000/quitMirror').map(res => res.json()).subscribe(
+        data => {
+          console.log(data);  
+        },err => {
+          //this.toast_error.present();
+        }
+    );
+  }
 
+  btn_reloadMirorr(){
+    this.http.get('http://localhost:3000/reloadMirror').map(res => res.json()).subscribe(
+        data => {
+          console.log(data);  
+        },err => {
+          //this.toast_error.present();
+        }
+    );
+  }
 
+  
 
 
   openModalWithParams() {

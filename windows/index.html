@@ -1,40 +1,54 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Hello World!</title>
-    <link href="./assets/css/style.css"  rel='stylesheet' type='text/css'>
-    <link href="node_modules/weathericons/css/weather-icons.min.css" rel="stylesheet" type="text/css" >
-    <link href="node_modules/weathericons/css/weather-icons-wind.min.css" rel="stylesheet" type="text/css" >
-    <link href="node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" >
-   <script src="./assets/js/main.js"></script>
-  </head>
-  <body>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Hello World!</title>
+  <link href="./assets/css/style.css" rel='stylesheet' type='text/css'>
+  <link href="node_modules/weathericons/css/weather-icons.min.css" rel="stylesheet" type="text/css">
+  <link href="node_modules/weathericons/css/weather-icons-wind.min.css" rel="stylesheet" type="text/css">
+  <link href="node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <script src="./assets/js/main.js"></script>
+  
+  <script>
+    var io = require('socket.io')
+    var socket = io();
+    console.log(socket)
+    socket.emit('chat message', "asdasdasHosseinManrzbaaskdj5645454");
+
+    socket.on('hi',function(_data){
+      console.log(_data);
+    })
+  </script>
+</head>
+
+<body>
 
 
-    <!-- <button id="btn_clickMe">show me</button> -->
+  <!-- <button id="btn_clickMe">show me</button> -->
 
-<main>
+  <main>
 
     <article class="art top_left"></article>
     <article class="art top_center"></article>
     <article class="art top_right"></article>
 
-    
+
 
 
     <article class="art bottom_left"></article>
     <article class="art bottom_center"></article>
     <article class="art bottom_right"></article>
 
-</main>
+  </main>
 
 
 
 
-    <script>
-      // You can also require other files to run in this process
-      require('./renderer.js')
-    </script>
-  </body>
+  <script>
+    // You can also require other files to run in this process
+    require('./renderer.js')
+  </script>
+</body>
+
 </html>

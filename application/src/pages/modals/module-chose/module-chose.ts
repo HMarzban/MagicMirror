@@ -143,6 +143,7 @@ export class ModuleChosePage {
 
   btn_addNweModule(){
 
+    this.moduleChose = [];
 
     console.log(this.t1)
     this.t1.forEach(function(val,index){
