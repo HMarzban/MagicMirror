@@ -19,20 +19,23 @@ $(function() {
 
             //TODO: load css & js file of module :(?)
 
-         //   console.log(module)
+            //console.log(module)
 
             var index = $config.modulee.findIndex(el => el.name==module.moduleName);
             var appendModule = $config.modulee[index];
-           // console.log(appendModule);
+           //console.log(appendModule);
             modul_configList['ID_'+module._id.toString()] = module;
 
-             $.get(path.join(__dirname, appendModule.display_src.html) , function(data){
-                 //first load html and set module ID
-                 $('.art.'+module.postion).prepend(data).find('section').eq(0).addClass('ID_'+module._id.toString()+' '+'pos-'+module.postion)
-                 //then load js, and js load seeting from ID which we gave in prev lines to section
-                 if(appendModule.display_src.js)
-                    fn_loadAssets(path.join(__dirname, appendModule.display_src.js),'.art.'+module.postion,'ID_'+module._id.toString());
-             });
+            
+            if(module.visibility){
+                $.get(path.join(__dirname, appendModule.display_src.html) , function(data){
+                    //first load html and set module ID
+                    $('.art.'+module.postion).prepend(data).find('section').eq(0).addClass('ID_'+module._id.toString()+' '+'pos-'+module.postion)
+                    //then load js, and js load seeting from ID which we gave in prev lines to section
+                    if(appendModule.display_src.js)
+                        fn_loadAssets(path.join(__dirname, appendModule.display_src.js),'.art.'+module.postion,'ID_'+module._id.toString());
+                });
+            }//condition
              
 
              //console.log(modul_configList)

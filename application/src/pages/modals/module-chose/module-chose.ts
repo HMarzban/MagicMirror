@@ -71,9 +71,7 @@ export class ModuleChosePage {
       console.log(this.qtd)
     },100);
 
-  }
-
-
+  }//moduleChoseChanged
 
   btn_delateModule(_module){
       let alert = this.alertCtrl.create({
@@ -97,7 +95,7 @@ export class ModuleChosePage {
         ]
       });
       alert.present();
-  }
+  }//btn_delateModule
 
   fn_removeModule(_module){
 
@@ -118,9 +116,7 @@ export class ModuleChosePage {
             console.log(err)
           }
       );
-  }
-
-
+  }//fn_removeModule
 
   btn_visibilityChange(_module){
     $('.moduleCarde').removeClass('animated  flipInX ').addClass('animated  flipOutX')
@@ -168,8 +164,6 @@ export class ModuleChosePage {
 
   }//btn_addNweModule
 
-
-
   btn_addConfToLocation(_conf){
 
 
@@ -207,6 +201,16 @@ export class ModuleChosePage {
 
 
     
+  }//btn_addConfToLocation
+
+
+
+
+  btn_setting(_event){
+    console.log(_event)
+
+   console.log( $('.moduleCarde[data-index='+_event+']').css({"height":"300px"}) )
+
   }
 
 

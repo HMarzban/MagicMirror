@@ -49,17 +49,30 @@
 
     
     <div class="box_list_cardModule" *ngIf="moduleAppend">
-        <ion-card  *ngFor="let module_list of moduleAppend"  class="moduleCarde animated flipInX">
-            <ion-card-content>
+        <ion-card  *ngFor="let module_list of moduleAppend; let i = index"  [attr.data-index]="i"   class="moduleCarde animated flipInX  "  >
+            <ion-card-content >
               <b> Name: </b> {{module_list.moduleName}}
               <br>
             </ion-card-content>
             <ion-item>
-              <span item-left></span>
-              <span item-left></span>
+
+
               <button (click)="btn_visibilityChange(module_list)" item-left ion-button icon-only clear round item-end [ngClass]="{'view_gray': !module_list.visibility}">
                 <ion-icon name="eye"></ion-icon>
               </button>
+
+              <button  (click)="btn_setting(i)" item-left ion-button icon-only clear round item-end >
+                  <ion-icon name="settings"></ion-icon>
+              </button>
+
+
+            
+              
+
+
+
+
+
               <button (click)="btn_delateModule(module_list)"  color="danger" ion-button icon-left round icon-only clear item-end>
                 <ion-icon name="trash"></ion-icon>
               </button>
