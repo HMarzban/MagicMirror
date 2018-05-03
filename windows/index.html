@@ -9,17 +9,7 @@
   <link href="node_modules/weathericons/css/weather-icons-wind.min.css" rel="stylesheet" type="text/css">
   <link href="node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <script src="./assets/js/main.js"></script>
-  
-  <script>
-    var io = require('socket.io')
-    var socket = io();
-    console.log(socket)
-    socket.emit('chat message', "asdasdasHosseinManrzbaaskdj5645454");
-
-    socket.on('hi',function(_data){
-      console.log(_data);
-    })
-  </script>
+  <script src="./node_modules/socket.io-client/dist/socket.io.js"></script>
 </head>
 
 <body>
@@ -32,6 +22,7 @@
     <article class="art top_left"></article>
     <article class="art top_center"></article>
     <article class="art top_right"></article>
+
 
 
 
