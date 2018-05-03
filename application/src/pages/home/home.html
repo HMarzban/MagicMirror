@@ -8,6 +8,10 @@
 
 <ion-content padding>
 
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
     <ion-chip #chip3>
         <ion-avatar>
           <img src="../../assets/imgs/avatar.jpg">
@@ -20,14 +24,46 @@
 
 
 
-      <div >
-        <button ion-button block (click)="btn_reloadMirorr()">Reload Mirror</button>
-        <button ion-button block color="danger" (click)="btn_quitMirorr()">Quit Mirror</button>
-     
+      <div *ngIf="isLoggedIn; else loginTemplate">
+        <h1>Welcome, {{displayName}}!</h1>
+        <p>Email: {{email}}<br>
+          Family Name: {{familyName}}<br>
+          Given Name: {{givenName}}<br>
+          User ID: {{userId}}</p>
+        <p><ion-avatar item-left>
+            <img src="{{imageUrl}}">
+           </ion-avatar></p>
+        <p><button ion-button (click)="logout()">Logout From Google</button></p>
       </div>
+    
+      <ng-template #loginTemplate>
+        <h1>Please Login to see your Google Account Information</h1>
+        <p><button ion-button (click)="login()">Login With Google</button></p>
+      </ng-template>
 
 
-      
+
+
+      <button  ion-fab mini  (click)="btnauthgoolge()"> <ion-icon name="add"></ion-icon> </button>
+    
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4 >
+            <button  ion-fab mini  (click)="btn_reloadMirorr()"> <ion-icon name="refresh"></ion-icon> </button>
+          </ion-col>
+          <ion-col col-4 >
+            <button   ion-fab mini    (click)="btn_quitMirorr()"> <ion-icon name="close"></ion-icon> </button>
+          </ion-col>
+          <ion-col col-4 >
+            <button ion-fab  mini> <ion-icon name="watch"></ion-icon> </button>
+            <button ion-fab  mini> <ion-icon name="wifi"></ion-icon> </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    
+ 
+
 
       <style>
       
@@ -63,44 +99,33 @@
       </div>
 
 
+ 
       <ion-list>
 
-          <ion-item>
-            <ion-label>Pepperoni</ion-label>
-            <ion-toggle></ion-toggle>
-          </ion-item>
+      <ion-item>
+        <ion-label stacked> Brightness of Screen ( {{windows_bright / 100}} ) </ion-label>
+        <ion-range min="0" max="100" step="10"  [(ngModel)]="windows_bright" (ionChange)="changeBright()">
+          <ion-icon small range-left name="sunny"></ion-icon>
+          <ion-icon range-right name="sunny"></ion-icon>
+        </ion-range>
+      </ion-item>
 
-          <ion-item>
-            <ion-label>Module</ion-label>
-            <ion-select>
-              <ion-option value="f">Calendar</ion-option>
-              <ion-option value="m">News</ion-option>
-              <ion-option value="m">Weather</ion-option>
-              <ion-option value="m">Clock</ion-option>
-            </ion-select>
-          </ion-item>
+      <ion-item>
+          <ion-label stacked> Size of Screen ( {{windows_zoom / 100}} )  </ion-label>
+          <ion-range min="0" max="200" step="10"  [(ngModel)]="windows_zoom" (ionChange)="changeZoom()">
+            <ion-icon small range-left name="resize"></ion-icon>
+            <ion-icon range-right name="resize"></ion-icon>
+          </ion-range>
+        </ion-item>
 
-      </ion-list>
+      <ion-item>
+          <ion-icon name="power" item-start [color]="windows_off ? 'secondary' : 'dark' "></ion-icon>
+          <ion-label>Screen {{windows_off ? 'ON' : 'OFF'}}</ion-label>
+          <ion-toggle [(ngModel)]="windows_off" (ionChange)="changeOff()"></ion-toggle>
+      </ion-item>
 
-
-      <div padding>
-          <button ion-button block (click)="openBasicModal()">send delate to server</button>
-      </div>
-
-      <div padding>
-        <button ion-button block color="danger" (click)="openModalWithParams()">Open with Parameters</button>
-      </div>
+    </ion-list>
 
 
 
-
-  <!-- <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p> -->
 </ion-content>

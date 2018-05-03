@@ -19,37 +19,11 @@
   </ion-header>
 
 
+
 <ion-content padding>
-
-
-
-
-    <style>
-    
-      .box_addModule{
-        display:none;
-      }
-
-      .box_empty{
-        color: #aaaa;
-        font-size: 20px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        text-align: center;
-        transform: translate(-50%,-50%);
-        overflow: auto;width: 100%;
-      }
-      .box_empty >  ion-icon{
-        font-size: 5em;color: #eee;
-      }
-
-    
-    </style>
-
     
     <div class="box_list_cardModule" *ngIf="moduleAppend">
-        <ion-card  *ngFor="let module_list of moduleAppend; let i = index"  [attr.data-index]="i"   class="moduleCarde animated flipInX  "  >
+        <ion-card  *ngFor="let module_list of moduleAppend; let i = index"   [attr.data-index]="i"   class="moduleCarde animated flipInX  "  >
             <ion-card-content >
               <b> Name: </b> {{module_list.moduleName}}
               <br>
@@ -66,13 +40,6 @@
               </button>
 
 
-            
-              
-
-
-
-
-
               <button (click)="btn_delateModule(module_list)"  color="danger" ion-button icon-left round icon-only clear item-end>
                 <ion-icon name="trash"></ion-icon>
               </button>
@@ -80,17 +47,17 @@
           </ion-card>
     </div><!--list_cardModule-->
 
-    <div class="box_addModule">
-            <p class="nd_divdedHeader">Chose your Module Then Configure IT</p>
+    <div class="box_addModule" >
+            <p class="nd_divdedHeader" *ngIf="flag_addModule">Chose your Module Then Configure IT</p>
         
         <ion-list>
-          <ion-item style="border:none">
+          <ion-item style="border:none" *ngIf="flag_addModule">
             <ion-label stacked>Chose module</ion-label>
             <ion-select [(ngModel)]="moduleChose" (ionChange)="moduleChoseChanged()">
               <ion-option *ngFor="let module of moduleList" value="{{module.name}}"> {{module.name}} </ion-option>
             </ion-select>
           </ion-item>
-          <div padding></div>
+          <div padding *ngIf="flag_addModule"></div>
 
           <p *ngIf="t1.setting" class="nd_divdedHeader animated slideInDown" style="text-align: center;font-size: 1.222em;text-transform: capitalize;border: 3px solid royalblue;box-shadow: 1px 1px 14px rgba(0,0,0,.5);border-radius: 4px;padding: 7px 0;margin-bottom: 28px;">{{moduleChose}} module setting</p>
             

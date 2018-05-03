@@ -18,5 +18,16 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
     });
+    
+    /*platform.ready().then(() => {
+        platform.pause.subscribe(() => {
+            console.log('[INFO] App paused');
+        });
+
+        platform.resume.subscribe(() => {
+            console.log('[INFO] App resumed');
+        });
+    });*/
+
   }
 }

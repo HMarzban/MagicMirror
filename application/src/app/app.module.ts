@@ -18,6 +18,14 @@ import { HTTP } from '@ionic-native/http';
 import { HttpModule } from '@angular/http';
 
 
+import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
+
+import { GooglePlus } from '@ionic-native/google-plus';
+
+
+const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -30,7 +38,8 @@ import { HttpModule } from '@angular/http';
   imports: [
     HttpModule,
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    SocketIoModule.forRoot(config) 
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -45,6 +54,7 @@ import { HttpModule } from '@angular/http';
     HTTP,
     StatusBar,
     SplashScreen,
+    GooglePlus ,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
