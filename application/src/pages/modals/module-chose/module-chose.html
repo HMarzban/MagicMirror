@@ -21,7 +21,7 @@
 
 
 <ion-content padding>
-    
+
     <div class="box_list_cardModule" *ngIf="moduleAppend">
         <ion-card  *ngFor="let module_list of moduleAppend; let i = index"   [attr.data-index]="i"   class="moduleCarde animated flipInX  "  >
             <ion-card-content >
@@ -49,7 +49,7 @@
 
     <div class="box_addModule" >
             <p class="nd_divdedHeader" *ngIf="flag_addModule">Chose your Module Then Configure IT</p>
-        
+
         <ion-list>
           <ion-item style="border:none" *ngIf="flag_addModule">
             <ion-label stacked>Chose module</ion-label>
@@ -60,7 +60,7 @@
           <div padding *ngIf="flag_addModule"></div>
 
           <p *ngIf="t1.setting" class="nd_divdedHeader animated slideInDown" style="text-align: center;font-size: 1.222em;text-transform: capitalize;border: 3px solid royalblue;box-shadow: 1px 1px 14px rgba(0,0,0,.5);border-radius: 4px;padding: 7px 0;margin-bottom: 28px;">{{moduleChose}} module setting</p>
-            
+
           <div *ngFor="let setting of t1.setting" class="animated slideInDown">
             <span *ngIf="setting.inputType == 'select';else inputType">
               <ion-item>
@@ -80,7 +80,7 @@
                 <label>{{setting.displayName}}</label>
                 <input dir="auto"  type="{{setting.inputType}}"  [(ngModel)]="qtd[setting.name]" [ngModel]="setting.value" [value]="setting.value" >
               </div>
-              
+
             </ng-template>
 
 
@@ -94,11 +94,11 @@
             <ng-template #inputTypeDivded>
                 <div padding></div>
                 <p class="nd_divdedHeader">{{setting.description}}</p>
-                
+
             </ng-template>
 
 
-            
+
 
 
 
@@ -123,8 +123,8 @@
 </ion-fab>
 
 
-    
-<div [style.display]="moduleAppend.length != 0 ?  'none' : 'block' " class="box_empty ">
+
+<div [style.display]="moduleAppend.length != 0 ?  'none' : 'block' " class="box_empty animated slideInUp ">
 
   <ion-icon name="outlet"></ion-icon>
   <p>There Is No Module Found</p>

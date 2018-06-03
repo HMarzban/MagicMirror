@@ -15,11 +15,11 @@ page-module-chose {
     .box_empty{
       color: #aaaa;
       font-size: 20px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
+      position: relative;
+      top: 25%;
+      // left: 50%;
       text-align: center;
-      transform: translate(-50%,-50%);
+      // transform: translate(-50%,-50%);
       overflow: auto;width: 100%;
     }
     .box_empty >  ion-icon{

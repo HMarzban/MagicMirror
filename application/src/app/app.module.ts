@@ -4,9 +4,12 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
+
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { LoginPage } from '../pages/login/login';
+import { ProfilePage } from '../pages/profile/profile';
+import { GadgetPage } from '../pages/gadget/gadget';
 
 import { ModuleChosePage } from '../pages/modals/module-chose/module-chose';
 
@@ -22,6 +25,8 @@ import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 
 import { GooglePlus } from '@ionic-native/google-plus';
 
+import { DeviceAccounts } from '@ionic-native/device-accounts';
+
 
 const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
 
@@ -30,31 +35,36 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
   declarations: [
     MyApp,
     AboutPage,
-    ContactPage,
     HomePage,
     TabsPage,
-    ModuleChosePage
+    LoginPage,
+    ModuleChosePage,
+    ProfilePage,
+    GadgetPage
   ],
   imports: [
     HttpModule,
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    SocketIoModule.forRoot(config) 
+    SocketIoModule.forRoot(config)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     AboutPage,
-    ContactPage,
     HomePage,
     TabsPage,
-    ModuleChosePage
+    LoginPage,
+    ModuleChosePage,
+    ProfilePage,
+    GadgetPage
   ],
   providers: [
     HTTP,
     StatusBar,
     SplashScreen,
     GooglePlus ,
+    DeviceAccounts,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

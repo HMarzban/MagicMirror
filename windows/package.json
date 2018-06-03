@@ -11,8 +11,14 @@
     "Electron"
   ],
   "author": "Hossein Marzbna",
+  "bin": {
+    "smir": "./cli/index.js"
+  },
   "devDependencies": {
+    "chalk": "^2.4.1",
+    "commander": "^2.15.1",
     "electron": "^1.8.4",
+    "inquirer": "^6.0.0",
     "nodemon": "^1.17.3"
   },
   "dependencies": {

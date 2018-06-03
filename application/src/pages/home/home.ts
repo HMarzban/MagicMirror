@@ -8,6 +8,8 @@ import { Socket } from 'ng-socket-io';
 
 import { GooglePlus } from '@ionic-native/google-plus';
 
+import { DeviceAccounts } from '@ionic-native/device-accounts';
+
 
 @Component({
   selector: 'page-home',
@@ -17,19 +19,22 @@ import { GooglePlus } from '@ionic-native/google-plus';
 export class HomePage {
 
 
-  displayName: any;
-  email: any;
-  familyName: any;
-  givenName: any;
-  userId: any;
-  imageUrl: any;
+  // displayName: any;
+  // email: any;
+  // familyName: any;
+  // givenName: any;
+  // userId: any;
+  // imageUrl: any;
 
   isLoggedIn:boolean = false;
+
+  public Brightness_off = false;
 
   public mirro_config = "";
   public windows_bright = 100;
   public windows_zoom = 100;
   public windows_off = true;
+  public emailDevice = "";
 
   constructor(
      public navCtrl: NavController,
@@ -37,7 +42,8 @@ export class HomePage {
      public toastCtrl: ToastController,
      public modalCtrl: ModalController,
      private socket: Socket,
-     private googlePlus: GooglePlus) {
+     private googlePlus: GooglePlus,
+     private deviceAccounts: DeviceAccounts) {
 
 
     this.socket.emit("hi", "hiiiiiiiii from application");
@@ -49,18 +55,20 @@ export class HomePage {
       closeButtonText : "Close",
       cssClass:"nd_alertMsg"
     });
-   
- 
+
+
 
     this.getConfData();
-        
+
 
   }// constructor
 
 
 
-  login() {
-    this.googlePlus.login({})
+  /*login() {
+    this.googlePlus.login({
+      'webClientId': '7082203431-pdhtem28r45ula08n3f7ta1ejl7h4lcv.apps.googleusercontent.com'
+    })
       .then(res => {
         console.log(res);
         this.displayName = res.displayName;
@@ -73,9 +81,9 @@ export class HomePage {
         this.isLoggedIn = true;
       })
       .catch(err => console.error(err));
-  }
+  }*/
 
-  logout() {
+  /*logout() {
     this.googlePlus.logout()
       .then(res => {
         console.log(res);
@@ -89,26 +97,40 @@ export class HomePage {
         this.isLoggedIn = false;
       })
       .catch(err => console.error(err));
-  }
+  }*/
 
 
 
 
 
-  btnauthgoolge(){
-    this.googlePlus.login({})
-    .then(res =>{
-      console.log(res)
-      alert(res);
-    } )
-    .catch(err => console.error(err));
-  }
+  /*btnauthgoolge(){
 
-  
+    this.deviceAccounts.get()
+      .then(accounts => console.log(accounts))
+      .catch(error => console.error(error));
+
+    this.deviceAccounts.getEmail()
+    .then(emailacount =>{
+
+      console.log(emailacount);
+      alert(emailacount)
+      this.emailDevice = emailacount;
+
+
+    })
+    .catch(error => {
+      console.error(error);
+      this.emailDevice = error;
+
+    });
+
+  }*/
+
+
   btn_quitMirorr(){
     this.http.get('http://localhost:3000/quitMirror').map(res => res.json()).subscribe(
         data => {
-          console.log(data);  
+          console.log(data);
         },err => {
           //this.toast_error.present();
         }
@@ -118,7 +140,7 @@ export class HomePage {
   btn_reloadMirorr(){
     this.http.get('http://localhost:3000/reloadMirror').map(res => res.json()).subscribe(
         data => {
-          console.log(data);  
+          console.log(data);
         },err => {
           //this.toast_error.present();
         }
@@ -127,6 +149,7 @@ export class HomePage {
 
   openModal(_location){
     let modulePostion = []
+    console.log(this.mirro_config["modulePostion"])
     this.mirro_config["modulePostion"].forEach((val,index)=>{
       if(val.postion == _location ){
         modulePostion.push(val);
@@ -154,7 +177,7 @@ export class HomePage {
           //console.log(data)
           this.mirro_config = data
 
-        
+
         },err => {
           //this.toast_error.present();
         }
@@ -166,14 +189,14 @@ export class HomePage {
 
     console.log((this.windows_bright / 100))
     this.socket.emit("changeBright", (this.windows_bright / 100));
-  
+
   }
 
   changeZoom(){
 
     console.log((this.windows_zoom / 100))
     this.socket.emit("changeZoom", (this.windows_zoom / 100));
-  
+
   }
 
   changeOff(){
