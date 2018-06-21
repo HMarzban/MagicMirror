@@ -30,6 +30,22 @@ sharedObj =  {express: app, socket: io};
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 960, height: 900,center:true,movable:true,fullscreen:false,skipTaskbar:false,autoHideMenuBar:false})
@@ -259,3 +275,7 @@ http.listen(3000, ()=>{
 
 
 require('./socket_server');
+
+
+
+

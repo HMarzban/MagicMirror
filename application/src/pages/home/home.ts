@@ -61,8 +61,41 @@ export class HomePage {
     this.getConfData();
 
 
+
+
+
+    this.socket.on('SmartSensore',(data)=>{
+      
+
+      console.log("ssssssssssssssssssssss")
+      console.log(data)
+    
+    
+    
+    })
+
+
+
+
+
+
+    this.listenSmartSensore();
+
+
   }// constructor
 
+
+  listenSmartSensore(){
+    console.log("listen")
+
+
+
+   
+      
+
+
+
+  }
 
 
   /*login() {
