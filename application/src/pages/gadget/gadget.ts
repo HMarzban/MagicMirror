@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Observable } from 'rxjs/Observable';
+import { Socket } from 'ng-socket-io';
+import { Jsonp } from '@angular/http';
 
 
 
@@ -49,23 +51,91 @@ export class GadgetPage {
   
   ];//WifiModule
 
+  public devices:any = [];
+  public sss:any = []
+
+  public mushrooms = true;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,private socket: Socket) {
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,) {
+    this.socket.emit('SmartSensore','sss')
 
+
+
+    setInterval(() => {
+      this.socket.emit("MQTT_Subscribe","MyData111111111111111")
+    }, 10000);
+
+
+    this.getMessages().subscribe((message:any) => {
+     
+
+      for (var property in message.detected_divices) {
+        let obj = message.detected_divices[property];
+
+          //First Divice
+          if(this.devices.length == 0)
+            this.devices.push(message.detected_divices[property])
+
+          
+          this.devices.find(x => {
+            if(x.id != message.detected_divices[property].id){
+              this.devices.push(message.detected_divices[property])
+            }else{
+
+              //update mqtt new data message 
+              this.devices.forEach((element, index) => {
+                if(element.id == message.detected_divices[property].id){
+                  this.devices[index] = obj
+                }
+              });
+            
+              
+            }
+          }); // Find 
+      }// loop
+
+
+      console.log(this.devices)
+    })// subscribe socket
     
 
 
+  }//constructor
+
+  ionViewDidLoad() {console.log('ionViewDidLoad GadgetPage');    }
+
+
+
+
+
+  getMessages() {
+    let observable = new Observable(observer => {
+      this.socket.on('SmartSensore', (data) => {
+        observer.next(data);    
+      });
+      return () => {
+        
+        //this.socket.disconnect();
+      };  
+    })     
+    return observable;
+  }  
+
+
+
+  button_toggleChange(_data){
+    console.log(_data);
+    this.socket.emit('MQTT_Publish', JSON.stringify( _data));
   }
 
-  ionViewDidLoad() {
-
-
-    console.log('ionViewDidLoad GadgetPage');
 
 
 
 
-  }
+
+
+
 
 }

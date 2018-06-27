@@ -36,6 +36,8 @@ export class HomePage {
   public windows_off = true;
   public emailDevice = "";
 
+
+
   constructor(
      public navCtrl: NavController,
      public http: Http,
@@ -61,21 +63,9 @@ export class HomePage {
     this.getConfData();
 
 
-
-
-
-    this.socket.on('SmartSensore',(data)=>{
-      
-
-      console.log("ssssssssssssssssssssss")
-      console.log(data)
     
     
-    
-    })
-
-
-
+   
 
 
 
@@ -87,6 +77,10 @@ export class HomePage {
 
   listenSmartSensore(){
     console.log("listen")
+
+
+    
+
 
 
 

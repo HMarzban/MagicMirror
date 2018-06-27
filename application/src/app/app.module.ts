@@ -28,6 +28,8 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { DeviceAccounts } from '@ionic-native/device-accounts';
 
 
+import { EscapeHtmlPipe } from './../pipes/keep-html.pipe';
+
 
 
 const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
@@ -42,7 +44,8 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     LoginPage,
     ModuleChosePage,
     ProfilePage,
-    GadgetPage
+    GadgetPage,
+    EscapeHtmlPipe
   ],
   imports: [
     HttpModule,
