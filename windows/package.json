@@ -11,11 +11,11 @@
   ],
   "author": "Hossein Marzbna",
   "devDependencies": {
-    "electron": "^1.8.4"
+    "electron": "^1.8.8"
   },
   "dependencies": {
     "font-awesome": "^4.7.0",
-    "jalali-moment": "^3.1.0",
+    "jalali-moment": "^3.2.1",
     "jquery": "^3.3.1",
     "json-query": "^2.2.2",
     "weathericons": "^2.1.0"
