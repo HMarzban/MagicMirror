@@ -62,7 +62,7 @@ export class GadgetPage {
     this.socket.emit('SmartSensore','sss')
 
 
-
+    // each on 10 seconds fetch new data 
     setInterval(() => {
       this.socket.emit("MQTT_Subscribe","MyData111111111111111")
     }, 10000);

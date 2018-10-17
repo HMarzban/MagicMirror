@@ -1,5 +1,7 @@
 windows/node_modules
-
+device_emulator/node_modules
+device_emulator/ssss
+device_emulator/empty
 
 # Specifies intentionally untracked files to ignore when using Git
 # http://git-scm.com/docs/gitignore

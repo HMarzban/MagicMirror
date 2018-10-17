@@ -279,3 +279,50 @@ require('./socket_server');
 
 
 
+
+
+
+
+
+
+/*var evilscan = require('evilscan');
+
+var options = {
+    target:'127.0.0.1-127.0.0.4',
+    port:'3000-3500',
+    status:'TROU', // Timeout, Refused, Open, Unreachable
+    banner:true
+};
+
+var scanner = new evilscan(options);
+
+
+
+function saasdas(){
+    scanner.on('result',function(data) {
+        // fired when item is matching options
+    
+        if(data.status == "open"){
+            console.log(data);
+        }
+        
+    });
+    
+    scanner.on('error',function(err) {
+        throw new Error(data.toString());
+    });
+    
+    scanner.on('done',function() {
+        // finished !
+    });
+
+    scanner.run();
+    
+}
+saasdas()
+setInterval(()=>{
+    console.log("start scan")
+    saasdas()
+},10000)*/
+
+

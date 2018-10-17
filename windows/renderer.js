@@ -73,7 +73,7 @@ var io = require('socket.io')(http);
         detected_divices:{}
     };
     
-    
+
     
     var mqtt = require('mqtt')
     var client = mqtt.connect('mqtt://192.168.43.12',{keepalive:0}),pub_mqtt = mqtt.connect('mqtt://192.168.43.12');
@@ -86,24 +86,90 @@ var io = require('socket.io')(http);
     let SmartModule = "";
     
     
+    let serverList = ["http://127.2.0.1:3000","http://127.2.0.2:3000","http://127.2.0.3:3000","http://127.2.0.4:3000"]
+
+
+    const request = async () => {
+
+        for (const _ip of serverList) {
+        const json = await fetch(_ip)
+        .then(response => response.json());
+
+
+
+            console.log(json);
+
+        }
+
+    }
     
+    request();
+
+
+
+
     
-    function get_device_moduleConfig(){
+   async function get_device_moduleConfig(){
     
         io.emit("SmartSensore",'SmartMosssssdasdasddule')
     
         //TODO: add retry to waite address and get data
-    
-                $.get( "http://192.168.43.239/", function( data ) {
+
+
+
+       /*for (const _ip of serverList) {
+            let ss =  request(_ip)
+            console.log(ss)
+        }*/
+    }
+
+
+
+
+
+  async function getAjax(_IP){
+      
+    /*return new Promise(async resolve=>{
+
+        let response = await fetch(_IP);
+        let json = await response.json();
+        console.log(json);
+        resolve('sss')
+
+    })*/
+
+        //setTimeout(()=>{resolve('true')},2000)
+
+        
+
+
+       /* $.ajax({
+            url: _IP,
+            method: "GET",
+        }).done(function( msg ) {
+            return new Promise( resolve=>{
+                //alert( "Data Saved: " + msg );
+                console.log(msg)
+                resolve('true')
+
+            })//promis
+        }).fail(function( err ) {
+            //alert( "Request failed: " + textStatus );
+            console.log(err)
+
+        });*/
+
+
+            /*$.get( _IP, function( data ) {
                     console.log(data)
                     SmartModule = data
 
 
                     GlobalDB.detected_divices[`${data.id}`] = data
                     //GlobalDB.detected_divices.push(data)
-    
 
-    
+                 
+
                     // subscribe base on device configuration
                     data.in_out.forEach(element => {
                         client.subscribe(`${element.subscribe}`);
@@ -111,15 +177,20 @@ var io = require('socket.io')(http);
                         //GlobalDB.divices_event.push({"name":`${element.subscribe.toString()}`})
                     });
 
+                   
+                    
+
 
 
                     //setInterval(() => {
                         // console.log("MQTT Status:"+client.connected)
                         //get_message()
                         //console.log(GlobalDB)
-                   // }, 8000);
-            });
-    
+                // }, 8000);
+            });*///@Ajax:Get
+
+        
+      
     }
     
     
@@ -231,7 +302,7 @@ var io = require('socket.io')(http);
 
 
 
-    
+    // it must be here
     setTimeout(() => {client.end();}, 1000);
 
 
@@ -258,6 +329,8 @@ var io = require('socket.io')(http);
 
             //after job done close connection.
             client.end();
+
+            console.log(GlobalDB)
 
             io.emit("SmartSensore",GlobalDB);
         }
@@ -321,12 +394,7 @@ var io = require('socket.io')(http);
 
 
 
-
-
-
-
-
-
+   
 
 
 
@@ -368,7 +436,7 @@ var io = require('socket.io')(http);
 
 
     http.listen(5000, function(){
-    console.log('listening on *:5000');
+        console.log('listening on *:5000');
     });
 
 
