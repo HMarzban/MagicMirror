@@ -20,19 +20,15 @@ import { HTTP } from '@ionic-native/http';
 
 import { HttpModule } from '@angular/http';
 
-
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 
 import { GooglePlus } from '@ionic-native/google-plus';
 
 import { DeviceAccounts } from '@ionic-native/device-accounts';
 
-
 import { EscapeHtmlPipe } from './../pipes/keep-html.pipe';
 
-
-
-const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 
 @NgModule({

@@ -2,7 +2,7 @@ const $ = require("jquery");
 const jQuery = require("jquery");
 const path = require('path');
 const moment = require('jalali-moment');
-const jsonQuery = require('json-query')
+//const jsonQuery = require('json-query')
 
 const $config = require(path.join(__dirname, 'config/main.json'));
 

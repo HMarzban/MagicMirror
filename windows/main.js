@@ -1,49 +1,17 @@
 
-var electron = require('electron');
+const electron = require('electron');
 // Module to control application life.
-var electron_app = electron.app;
+const electron_app = electron.app;
 // Module to create native browser window.
-var BrowserWindow = electron.BrowserWindow;
-var path = require('path');
-var url = require('url');
-var remote = require('electron').remote
-
-var ipcMain = electron.ipcMain
-
-var mainWindow;
-
-var express = require('express');
-var app = express();
-var jsonQuery = require('json-query');
-var fs = require('fs');
-var bodyParser = require('body-parser');
-
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+const BrowserWindow = electron.BrowserWindow;
+const path = require('path');
+const url = require('url');
 
 
-sharedObj =  {express: app, socket: io};
+let mainWindow;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function createWindow () {
@@ -68,9 +36,7 @@ function createWindow () {
     mainWindow = null;
   })
 
-
-
-}
+} //@Function:createWindow()
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -84,7 +50,7 @@ electron_app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') {
     electron_app.quit();
   }
-})
+}); //@Listner: window-all-closed
 
 electron_app.on('activate', function () {
   // On OS X it's common to re-create a window in the app when the
@@ -92,237 +58,7 @@ electron_app.on('activate', function () {
   if (mainWindow === null) {
     createWindow();
   }
-})
+}); //@Listner: activate
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
-
-
-
-
-
-
-/*                                     */
-/*                                     */
-//======================================
-//======================================
-//          express server
-//======================================
-//======================================
-/*                                     */
-/*                                     */
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json()); // support json encoded bodies
-app.use(function (req, res, next) {
-    //TODO: replace "*" to IP address.
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
-
-app.get('/', (req, res) => {
-
-    console.log("Hi Man what's up");
-    res.write("<h1>Hello man to magic mirror</h1>")
-
-
-});
-
-
-
-
-
-app.get('/conf', (req, res) => {
-    res.sendFile(path.join(__dirname, './config/main.json'));
-});
-app.post('/visibility', (req, res) => {
-
-    let conf = require(path.join(__dirname, 'config/main.json'));
-
-    conf["modulePostion"].forEach((element, index) => {
-        if (element["_id"] == req.body.id) {
-            //conf["modulePostion"].splice(index, 1) 
-            conf["modulePostion"][index].visibility = !req.body.visibility
-        }
-    });
-
-    fs.writeFile('config/main.json', JSON.stringify(conf), (err) => {
-        if (err) {
-            res.json({ "is": false, "msg": err });
-            throw err;
-        } else {
-            conf = require(path.join(__dirname, 'config/main.json'));
-            let modulePostion = [];
-
-            conf["modulePostion"].forEach((val, index) => {
-                if (val.postion == req.body.location) {
-                    modulePostion.push(val);
-                }
-            });
-
-            res.json({ "is": true, "visibility": !req.body.visibility, "moduleList": modulePostion });
-            mainWindow.reload();
-        }
-    });
-
-});
-app.post('/removeModule', (req, res) => {
-
-    let conf = require(path.join(__dirname, 'config/main.json'));
-    conf["modulePostion"].forEach((element, index) => {
-        if (element["_id"] == req.body.id) {
-            conf["modulePostion"].splice(index, 1)
-        }
-    });
-
-    fs.writeFile('config/main.json', JSON.stringify(conf), (err) => {
-        if (err) {
-            res.json({ "is": false, "msg": err });
-            throw err;
-        } else {
-            conf = require(path.join(__dirname, 'config/main.json'));
-            let modulePostion = [];
-
-            conf["modulePostion"].forEach((val, index) => {
-                if (val.postion == req.body.location) {
-                    modulePostion.push(val);
-                }
-            });
-            res.json({ "is": true, "visibility": !req.body.visibility, "moduleList": modulePostion });
-            //after remove module reload the application
-            mainWindow.reload();
-        }
-    });
-
-
-
-});
-
-app.post('/updateModule', (req, res) => {
-    //modulePostion
-    let conf = require(path.join(__dirname, 'config/main.json'));
-    conf["modulePostion"].forEach((element, index) => {
-        if (element["_id"] == req.body.module._id) {
-            //conf["modulePostion"].splice(index, 1) 
-            conf["modulePostion"][index] = req.body.module
-        }
-    });
-    fs.writeFile('config/main.json', JSON.stringify(conf), (err) => {
-        if (err) {
-            res.json({ "is": false, "msg": err });
-            throw err;
-        } else {
-            conf = require(path.join(__dirname, 'config/main.json'));
-            let modulePostion = [];
-
-            conf["modulePostion"].forEach((val, index) => {
-                if (val.postion == req.body.location) {
-                    modulePostion.push(val);
-                }
-            });
-            res.json({ "is": true, "moduleList": modulePostion });
-            mainWindow.reload();
-        }
-    });
-});// app post /addModule
-
-app.get('/quitMirror',(req, res)=>{
-    //electron_app
-    mainWindow.close()
-    
-    res.json({ "is": true, "msg":"Mirror Quit successfully" });
-});
-
-app.get('/reloadMirror',(req, res)=>{
-    mainWindow.reload();
-    res.json({ "is": true, "msg":"Mirror Reload successfully" });
-});
-
-app.post('/addModule', (req, res)=>{
-    //modulePostion
-    let conf = require(path.join(__dirname, 'config/main.json'));
-    //generate current time for ID
-    req.body.module._id = new Date().getTime();
-    conf["modulePostion"].push(req.body.module);
-    fs.writeFile('config/main.json', JSON.stringify(conf), (err) => {
-        if (err) {
-            res.json({ "is": false, "msg": err });
-            throw err;
-        } else {
-
-            let modulePostion = [];
-
-            conf["modulePostion"].forEach((val, index) => {
-                if (val.postion == req.body.location) {
-                    modulePostion.push(val);
-                }
-            });
-            res.json({ "is": true, "msg":"Module added successfully","moduleList": modulePostion  });
-            //after add new module reload the application
-            mainWindow.reload();
-        }
-    });
-});// app post /addModule
-
-
-
-
-http.listen(3000, ()=>{
-    console.log("magic server ready to use over http, serve on port 3000 enjoy :)");
-});
-
-
-
-require('./socket_server');
-
-
-
-
-
-
-
-
-
-
-/*var evilscan = require('evilscan');
-
-var options = {
-    target:'127.0.0.1-127.0.0.4',
-    port:'3000-3500',
-    status:'TROU', // Timeout, Refused, Open, Unreachable
-    banner:true
-};
-
-var scanner = new evilscan(options);
-
-
-
-function saasdas(){
-    scanner.on('result',function(data) {
-        // fired when item is matching options
-    
-        if(data.status == "open"){
-            console.log(data);
-        }
-        
-    });
-    
-    scanner.on('error',function(err) {
-        throw new Error(data.toString());
-    });
-    
-    scanner.on('done',function() {
-        // finished !
-    });
-
-    scanner.run();
-    
-}
-saasdas()
-setInterval(()=>{
-    console.log("start scan")
-    saasdas()
-},10000)*/
-
-
