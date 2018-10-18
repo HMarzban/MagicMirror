@@ -11,6 +11,8 @@ import { LoginPage } from '../pages/login/login';
 import { ProfilePage } from '../pages/profile/profile';
 import { GadgetPage } from '../pages/gadget/gadget';
 
+import { EntryPage } from '../pages/entry/entry';
+
 import { ModuleChosePage } from '../pages/modals/module-chose/module-chose';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -38,6 +40,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     HomePage,
     TabsPage,
     LoginPage,
+    EntryPage,
     ModuleChosePage,
     ProfilePage,
     GadgetPage,
@@ -56,6 +59,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     HomePage,
     TabsPage,
     LoginPage,
+    EntryPage,
     ModuleChosePage,
     ProfilePage,
     GadgetPage

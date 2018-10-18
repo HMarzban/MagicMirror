@@ -1,9 +1,12 @@
 
 const bodyParser = require('body-parser');
+const requestIp = require('request-ip');
 
 const middleware = (app) =>{
 
-
+    app.set('trust proxy', true)
+    
+    app.use(requestIp.mw())
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json()); // support json encoded bodies
     app.use(function (req, res, next) {

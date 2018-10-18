@@ -134,6 +134,31 @@ body main{
 .art.bottom_right{bottom:10px;right: 10px;}
 
 
+#alert{
+	position: fixed;
+	left: 4px;
+	font-size: 12px;
+	bottom: 4px;
+	color:#fff;
+	padding:6px 20px;
+	border-radius: 3px;
+	background: #8484844d;
+	text-transform: capitalize;
+	font-family:  'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+  }
+  #connectionStatus{
+	width: 25px;
+	position: fixed;
+	top: 6px;
+	left: 6px;
+	border: 1px solid #aaa;
+	height: 25px;
+	border-radius: 100px;
+	overflow: hidden;
+	padding: 5px;
+	text-align: center;
+	line-height: 15px;
+  }
 
 
 

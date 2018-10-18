@@ -1,30 +1,35 @@
 page-module-chose {
-    .tabbar{
-        opacity: 1!important;
-    }
-    .nd_divdedHeader{
-      font-weight: bold;
-      font-size: 1.11em;
-      padding-bottom: 4px;
-      border-bottom: 2px solid orangered;
-    }
-    .box_addModule{
-      display:none;
-    }
+  .tabbar {
+    opacity: 1 !important;
+  }
 
-    .box_empty{
-      color: #aaaa;
-      font-size: 20px;
-      position: relative;
-      top: 25%;
-      // left: 50%;
-      text-align: center;
-      // transform: translate(-50%,-50%);
-      overflow: auto;width: 100%;
-    }
-    .box_empty >  ion-icon{
-      font-size: 5em;color: #eee;
-    }
+  .nd_divdedHeader {
+    font-weight: bold;
+    font-size: 1.11em;
+    padding-bottom: 4px;
+    border-bottom: 2px solid orangered;
+  }
+
+  .box_addModule {
+    display: none;
+  }
+
+  .box_empty {
+    color: #aaaa;
+    font-size: 20px;
+    position: relative;
+    top: 25%;
+    // left: 50%;
+    text-align: center;
+    // transform: translate(-50%,-50%);
+    overflow: auto;
+    width: 100%;
+  }
+
+  .box_empty>ion-icon {
+    font-size: 5em;
+    color: #eee;
+  }
 }
 
 body.ios {
@@ -32,6 +37,7 @@ body.ios {
     &[aria-selected="false"] {
       color: #8c8c8c !important;
     }
+
     &[aria-selected="true"] {
       color: #f53d3d !important;
     }
@@ -39,9 +45,9 @@ body.ios {
 }
 
 .moduleCarde {
-     animation-delay:.2s;
-     .view_gray{
-        color: #aaa;
-     }
-}
+  animation-delay: .2s;
 
+  .view_gray {
+    color: #aaa;
+  }
+}

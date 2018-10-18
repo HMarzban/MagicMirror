@@ -1,12 +1,20 @@
 const fs = require('fs');
+const mainWindow = require('electron').remote.getCurrentWindow();
+
 const routers = (app) =>{
 
-    app.get('/conf', (req, res) => {
-        res.sendFile(path.join(__dirname, './config/main.json'));
+    app.get('/', (req, res) => {
+        console.info("Hi Man what's up");
+        res.write("<h1>Hello man to magic mirror</h1>")
     });
+
+    app.get('/conf', (req, res) => {
+        res.sendFile(path.join(__dirname, '../config/main.json'));
+    });
+
     app.post('/visibility', (req, res) => {
 
-        let conf = require(path.join(__dirname, 'config/main.json'));
+        let conf = require(path.join(__dirname, '../config/main.json'));
 
         conf["modulePostion"].forEach((element, index) => {
             if (element["_id"] == req.body.id) {
@@ -15,12 +23,12 @@ const routers = (app) =>{
             }
         });
 
-        fs.writeFile('config/main.json', JSON.stringify(conf), (err) => {
+        fs.writeFile(path.join(__dirname,'../config/main.json'), JSON.stringify(conf), (err) => {
             if (err) {
                 res.json({ "is": false, "msg": err });
                 throw err;
             } else {
-                conf = require(path.join(__dirname, 'config/main.json'));
+                conf = require(path.join(__dirname, '../config/main.json'));
                 let modulePostion = [];
 
                 conf["modulePostion"].forEach((val, index) => {
@@ -38,19 +46,19 @@ const routers = (app) =>{
 
     app.post('/removeModule', (req, res) => {
 
-        let conf = require(path.join(__dirname, 'config/main.json'));
+        let conf = require(path.join(__dirname, '../config/main.json'));
         conf["modulePostion"].forEach((element, index) => {
             if (element["_id"] == req.body.id) {
                 conf["modulePostion"].splice(index, 1)
             }
         });
 
-        fs.writeFile('config/main.json', JSON.stringify(conf), (err) => {
+        fs.writeFile(path.join(__dirname,'../config/main.json'), JSON.stringify(conf), (err) => {
             if (err) {
                 res.json({ "is": false, "msg": err });
                 throw err;
             } else {
-                conf = require(path.join(__dirname, 'config/main.json'));
+                conf = require(path.join(__dirname, '../config/main.json'));
                 let modulePostion = [];
 
                 conf["modulePostion"].forEach((val, index) => {
@@ -68,19 +76,19 @@ const routers = (app) =>{
 
     app.post('/updateModule', (req, res) => {
         //modulePostion
-        let conf = require(path.join(__dirname, 'config/main.json'));
+        let conf = require(path.join(__dirname, '../config/main.json'));
         conf["modulePostion"].forEach((element, index) => {
             if (element["_id"] == req.body.module._id) {
                 //conf["modulePostion"].splice(index, 1) 
                 conf["modulePostion"][index] = req.body.module
             }
         });
-        fs.writeFile('config/main.json', JSON.stringify(conf), (err) => {
+        fs.writeFile(path.join(__dirname,'../config/main.json'), JSON.stringify(conf), (err) => {
             if (err) {
                 res.json({ "is": false, "msg": err });
                 throw err;
             } else {
-                conf = require(path.join(__dirname, 'config/main.json'));
+                conf = require(path.join(__dirname, '../config/main.json'));
                 let modulePostion = [];
 
                 conf["modulePostion"].forEach((val, index) => {
@@ -108,11 +116,11 @@ const routers = (app) =>{
 
     app.post('/addModule', (req, res)=>{
         //modulePostion
-        let conf = require(path.join(__dirname, 'config/main.json'));
+        let conf = require(path.join(__dirname, '../config/main.json'));
         //generate current time for ID
         req.body.module._id = new Date().getTime();
         conf["modulePostion"].push(req.body.module);
-        fs.writeFile('config/main.json', JSON.stringify(conf), (err) => {
+        fs.writeFile(path.join(__dirname,'../config/main.json'), JSON.stringify(conf), (err) => {
             if (err) {
                 res.json({ "is": false, "msg": err });
                 throw err;
@@ -131,8 +139,6 @@ const routers = (app) =>{
             }
         });
     });// app post /addModule
-
-
 
 }; //@Function: routers( app )
 

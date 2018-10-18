@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
-
+import { EntryPage } from '../pages/entry/entry';
 
 
 @Component({
@@ -22,20 +22,22 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
       localStorage.setItem("isLogin",'true')
-      this.fn_authGuard();
+     // this.fn_authGuard();
+     this.checkServerConnetction()
     });
+  } //@constructor
 
-    /*platform.ready().then(() => {
-        platform.pause.subscribe(() => {
-            console.log('[INFO] App paused');
-        });
+  checkServerConnetction(){
+    const serverIPAddress = localStorage.getItem("ServerRemoteAddress")
+    if(serverIPAddress != null){
+      console.log("we have ip address")
+      this.rootPage = TabsPage;
+    }else{
+      console.log("we need ip address guide user to page that can get ip address.")
+      this.rootPage = EntryPage;
+    }
+  }
 
-        platform.resume.subscribe(() => {
-            console.log('[INFO] App resumed');
-        });
-    });*/
-
-  }//constructor
   fn_authGuard(){
 
     let auth = localStorage.getItem("isLogin")
@@ -48,7 +50,5 @@ export class MyApp {
     }else{
       localStorage.getItem("isLogin")
     }
-
-
-  }
+  } //@Function: fn_authGuard()
 }

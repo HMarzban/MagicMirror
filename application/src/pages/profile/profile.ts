@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,App  } from 'ionic-angular';
+
+import {EntryPage} from "../entry/entry"
 
 /**
  * Generated class for the ProfilePage page.
@@ -15,11 +17,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ProfilePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public appCtrl: App,public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
+  }
+
+  LogOut(){
+    localStorage.removeItem("ServerRemoteAddress");
+
+    //this.navCtrl.setRoot( EntryPage );
+    this.appCtrl.getRootNav().setRoot(EntryPage);
   }
 
 }

@@ -1,13 +1,29 @@
 // position: top_left, top_center, top_right
 // position: bottom_left, bottom_center, bottom_right
 //const jQuery = $ = require('jquery');
+const ip = require('ip');
 
 const socket = (io) => {
 
+
+    $('body #alert').find("b").html(ip.address());
+    
+    $('body #alert').slideDown();
+    $("body #connectionStatus").slideUp();
+
     io.on('connection', function(socket){
+
         console.log('a user connected');
+        $('body #alert').slideUp();
+        $("body #connectionStatus").slideDown()
+      
+
         socket.on('disconnect', function(){
+
             console.log('user disconnected');
+            $('body #alert').slideDown();
+            $("body #connectionStatus").slideUp()
+
         });
 
         socket.on('hi', function(msg){

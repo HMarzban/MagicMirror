@@ -58,19 +58,15 @@ export class GadgetPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private socket: Socket) {
 
-
     this.socket.emit('SmartSensore','sss')
-
 
     // each on 10 seconds fetch new data 
     setInterval(() => {
       this.socket.emit("MQTT_Subscribe","MyData111111111111111")
     }, 10000);
 
-
     this.getMessages().subscribe((message:any) => {
      
-
       for (var property in message.detected_divices) {
         let obj = message.detected_divices[property];
 
@@ -95,12 +91,9 @@ export class GadgetPage {
             }
           }); // Find 
       }// loop
-
-
       console.log(this.devices)
     })// subscribe socket
     
-
 
   }//constructor
 
@@ -121,14 +114,14 @@ export class GadgetPage {
       };  
     })     
     return observable;
-  }  
+  } //@Function: getMessages()
 
 
 
   button_toggleChange(_data){
     console.log(_data);
     this.socket.emit('MQTT_Publish', JSON.stringify( _data));
-  }
+  } //@Function: button_toggleChange()
 
 
 

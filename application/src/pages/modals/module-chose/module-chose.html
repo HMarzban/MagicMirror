@@ -4,148 +4,102 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-
-
-
 <ion-header>
-    <ion-toolbar>
-      <ion-title>ModuleChose</ion-title>
-      <ion-buttons end>
-        <button ion-button icon-only color="royal" (click)="dismiss()" >
-            <ion-icon name="close"></ion-icon>
-        </button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
-
+  <ion-toolbar>
+    <ion-title>ModuleChose</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="royal" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
 
 <ion-content padding>
 
-    <div class="box_list_cardModule" *ngIf="moduleAppend">
-        <ion-card  *ngFor="let module_list of moduleAppend; let i = index"   [attr.data-index]="i"   class="moduleCarde animated flipInX  "  >
-            <ion-card-content >
-              <b> Name: </b> {{module_list.moduleName}}
-              <br>
-            </ion-card-content>
-            <ion-item>
-
-
-              <button (click)="btn_visibilityChange(module_list)" item-left ion-button icon-only clear round item-end [ngClass]="{'view_gray': !module_list.visibility}">
-                <ion-icon name="eye"></ion-icon>
-              </button>
-
-              <button  (click)="btn_setting(i)" item-left ion-button icon-only clear round item-end >
-                  <ion-icon name="settings"></ion-icon>
-              </button>
-
-
-              <button (click)="btn_delateModule(module_list)"  color="danger" ion-button icon-left round icon-only clear item-end>
-                <ion-icon name="trash"></ion-icon>
-              </button>
-            </ion-item>
-          </ion-card>
-    </div><!--list_cardModule-->
-
-    <div class="box_addModule" >
-            <p class="nd_divdedHeader" *ngIf="flag_addModule">Chose your Module Then Configure IT</p>
-
-        <ion-list>
-          <ion-item style="border:none" *ngIf="flag_addModule">
-            <ion-label stacked>Chose module</ion-label>
-            <ion-select [(ngModel)]="moduleChose" (ionChange)="moduleChoseChanged()">
-              <ion-option *ngFor="let module of moduleList" value="{{module.name}}"> {{module.name}} </ion-option>
+  <div class="box_list_cardModule" *ngIf="moduleAppend">
+    <ion-card *ngFor="let module_list of moduleAppend; let i = index" [attr.data-index]="i" class="moduleCarde animated flipInX  ">
+      <ion-card-content>
+        <b> Name: </b> {{module_list.moduleName}}
+        <br>
+      </ion-card-content>
+      <ion-item>
+        <button (click)="btn_visibilityChange(module_list)" item-left ion-button icon-only clear round item-end
+          [ngClass]="{'view_gray': !module_list.visibility}">
+          <ion-icon name="eye"></ion-icon>
+        </button>
+        <button (click)="btn_setting(i)" item-left ion-button icon-only clear round item-end>
+          <ion-icon name="settings"></ion-icon>
+        </button>
+        <button (click)="btn_delateModule(module_list)" color="danger" ion-button icon-left round icon-only clear
+          item-end>
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item>
+    </ion-card>
+  </div>
+  <!--list_cardModule-->
+  <div class="box_addModule">
+    <p class="nd_divdedHeader" *ngIf="flag_addModule">Chose your Module Then Configure IT</p>
+    <ion-list>
+      <ion-item style="border:none" *ngIf="flag_addModule">
+        <ion-label stacked>Chose module</ion-label>
+        <ion-select [(ngModel)]="moduleChose" (ionChange)="moduleChoseChanged()">
+          <ion-option *ngFor="let module of moduleList" value="{{module.name}}"> {{module.name}} </ion-option>
+        </ion-select>
+      </ion-item>
+      <div padding *ngIf="flag_addModule"></div>
+      <p *ngIf="t1.setting" class="nd_divdedHeader animated slideInDown" style="text-align: center;font-size: 1.222em;text-transform: capitalize;border: 3px solid royalblue;box-shadow: 1px 1px 14px rgba(0,0,0,.5);border-radius: 4px;padding: 7px 0;margin-bottom: 28px;">{{moduleChose}}
+        module setting</p>
+      <div *ngFor="let setting of t1.setting" class="animated slideInDown">
+        <span *ngIf="setting.inputType == 'select';else inputType">
+          <ion-item>
+            <ion-label stacked>{{setting.displayName}}</ion-label>
+            <ion-select [(ngModel)]="qtd[setting.name]">
+              <ion-option *ngFor="let option of setting.value" value="{{option}}" selected="{{ option == setting.defualt }}">
+                {{option}} </ion-option>
             </ion-select>
           </ion-item>
-          <div padding *ngIf="flag_addModule"></div>
-
-          <p *ngIf="t1.setting" class="nd_divdedHeader animated slideInDown" style="text-align: center;font-size: 1.222em;text-transform: capitalize;border: 3px solid royalblue;box-shadow: 1px 1px 14px rgba(0,0,0,.5);border-radius: 4px;padding: 7px 0;margin-bottom: 28px;">{{moduleChose}} module setting</p>
-
-          <div *ngFor="let setting of t1.setting" class="animated slideInDown">
-            <span *ngIf="setting.inputType == 'select';else inputType">
-              <ion-item>
-                <ion-label stacked>{{setting.displayName}}</ion-label>
-                <ion-select  [(ngModel)]="qtd[setting.name]" >
-                  <ion-option *ngFor="let option of setting.value" value="{{option}}" selected="{{ option == setting.defualt }}"> {{option}} </ion-option>
-                </ion-select>
-              </ion-item>
-            </span>
-            <ng-template #inputType>
-              <style>
-                .nd_input{padding-left: 18px;}
+        </span>
+        <ng-template #inputType>
+          <style>
+            .nd_input{padding-left: 18px;}
                 .nd_input > input{width: 100%;padding: 2px 0;border: none;border-bottom: 1px solid #c8c7cc;font-size: 1.22em;}
                 .nd_input > label{margin-bottom: 4px;font-size: 1.2rem;margin: 11px 8px 11px 0;display: block;overflow: hidden;-webkit-box-flex: 1;-webkit-flex: 1;-ms-flex: 1;flex: 1;text-overflow: ellipsis;white-space: nowrap;}
               </style>
-              <div class="nd_input"  *ngIf="setting.inputType == 'text' || setting.inputType == 'number' ;else inputTypeToggle">
-                <label>{{setting.displayName}}</label>
-                <input dir="auto"  type="{{setting.inputType}}"  [(ngModel)]="qtd[setting.name]" [ngModel]="setting.value" [value]="setting.value" >
-              </div>
-
-            </ng-template>
-
-
-            <ng-template #inputTypeToggle>
-                <ion-item *ngIf="setting.inputType == 'boolean';else inputTypeDivded">
-                  <ion-label stacked>{{setting.displayName}}</ion-label>
-                  <ion-toggle  [(ngModel)]="qtd[setting.name]"></ion-toggle>
-                </ion-item>
-            </ng-template>
-
-            <ng-template #inputTypeDivded>
-                <div padding></div>
-                <p class="nd_divdedHeader">{{setting.description}}</p>
-
-            </ng-template>
-
-
-
-
-
-
+          <div class="nd_input" *ngIf="setting.inputType == 'text' || setting.inputType == 'number' ;else inputTypeToggle">
+            <label>{{setting.displayName}}</label>
+            <input dir="auto" type="{{setting.inputType}}" [(ngModel)]="qtd[setting.name]" [ngModel]="setting.value"
+              [value]="setting.value">
           </div>
-        </ion-list>
-
-        <div padding>
-          <button ion-button block (click)="btn_addConfToLocation(ModuleCurrent)" >Add Module To List </button>
-        </div>
-
-        <!-- {{ qtd | json}} -->
-
-    </div><!--box_addModule-->
-
-
-
-
-<ion-fab bottom right #fab class="btn_addNewModule">
-  <button ion-fab mini color="danger" (click)="btn_addNweModule()">
-    <ion-icon name="add"></ion-icon>
-  </button>
-</ion-fab>
-
-
-
-<div [style.display]="moduleAppend.length != 0 ?  'none' : 'block' " class="box_empty animated slideInUp ">
-
-  <ion-icon name="outlet"></ion-icon>
-  <p>There Is No Module Found</p>
-
-</div>
-<!--box_empty-->
-
-
-
+        </ng-template>
+        <ng-template #inputTypeToggle>
+          <ion-item *ngIf="setting.inputType == 'boolean';else inputTypeDivded">
+            <ion-label stacked>{{setting.displayName}}</ion-label>
+            <ion-toggle [(ngModel)]="qtd[setting.name]"></ion-toggle>
+          </ion-item>
+        </ng-template>
+        <ng-template #inputTypeDivded>
+          <div padding></div>
+          <p class="nd_divdedHeader">{{setting.description}}</p>
+        </ng-template>
+      </div>
+    </ion-list>
+    <div padding>
+      <button ion-button block (click)="btn_addConfToLocation(ModuleCurrent)">Add Module To List </button>
+    </div>
+    <!-- {{ qtd | json}} -->
+  </div>
+  <!--box_addModule-->
+  <ion-fab bottom right #fab class="btn_addNewModule">
+    <button ion-fab mini color="danger" (click)="btn_addNweModule()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+  <div [style.display]="moduleAppend.length != 0 ?  'none' : 'block' " class="box_empty animated slideInUp ">
+    <ion-icon name="outlet"></ion-icon>
+    <p>There Is No Module Found</p>
+  </div>
+  <!--box_empty-->
 </ion-content>
-
-
-<!-- <ion-footer>
-    <ion-toolbar>
-
-      <ion-tabs>
-          <ion-tab tabIcon="add" ></ion-tab>
-          <ion-tab tabIcon="list-box" ></ion-tab>
-          <ion-tab  (ionSelect)="dismiss()" tabIcon="arrow-down" ></ion-tab>
-      </ion-tabs>
-    </ion-toolbar>
-  </ion-footer>
-
- -->

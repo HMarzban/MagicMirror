@@ -22,4 +22,4 @@ export class TabsPage {
   constructor(platform: Platform) {
     this.isAndroid = platform.is('android');
   }
-}
+} //@Class: TabsPage()

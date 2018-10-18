@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController,ModalController, NavParams } from 'ionic-angular';
+import { NavController,ModalController, AlertController } from 'ionic-angular';
 import { ModuleChosePage } from '../modals/module-chose/module-chose';
 import { ToastController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Socket } from 'ng-socket-io';
-
-import { GooglePlus } from '@ionic-native/google-plus';
-
-import { DeviceAccounts } from '@ionic-native/device-accounts';
+//import { GooglePlus } from '@ionic-native/google-plus';
+//import { DeviceAccounts } from '@ionic-native/device-accounts';
 
 
 @Component({
@@ -18,78 +16,40 @@ import { DeviceAccounts } from '@ionic-native/device-accounts';
 
 export class HomePage {
 
-
-  // displayName: any;
-  // email: any;
-  // familyName: any;
-  // givenName: any;
-  // userId: any;
-  // imageUrl: any;
-
   isLoggedIn:boolean = false;
-
   public Brightness_off = false;
-
   public mirro_config = "";
   public windows_bright = 100;
   public windows_zoom = 100;
   public windows_off = true;
   public emailDevice = "";
-
-
+  public settings;
 
   constructor(
-     public navCtrl: NavController,
-     public http: Http,
-     public toastCtrl: ToastController,
-     public modalCtrl: ModalController,
-     private socket: Socket,
-     private googlePlus: GooglePlus,
-     private deviceAccounts: DeviceAccounts) {
+      public navCtrl: NavController,
+      public http: Http,
+      public toastCtrl: ToastController,
+      public modalCtrl: ModalController,
+      private socket: Socket,
+      private alertCtrl: AlertController,
+      //private googlePlus: GooglePlus,
+      //private deviceAccounts: DeviceAccounts
+    
+     ) {
 
-
+    this.settings = JSON.parse( localStorage.getItem("ServerRemoteAddress"))
     this.socket.emit("hi", "hiiiiiiiii from application");
-
-    let toast_error = this.toastCtrl.create({
-      position: 'top',
-      message: 'Sorry we have Problem to Connect the Server. Check your Connection or IP Address',
-      duration: 4000,
-      closeButtonText : "Close",
-      cssClass:"nd_alertMsg"
-    });
-
-
 
     this.getConfData();
 
-
-    
-    
-   
-
-
-
     this.listenSmartSensore();
-
 
   }// constructor
 
 
   listenSmartSensore(){
     console.log("listen")
-
-
-    
-
-
-
-
-   
-      
-
-
-
-  }
+  } //@Function: listenSmartSensore()
 
 
   /*login() {
@@ -153,92 +113,94 @@ export class HomePage {
 
   }*/
 
-
   btn_quitMirorr(){
-    this.http.get('http://localhost:3000/quitMirror').map(res => res.json()).subscribe(
+    this.http.get(`${this.settings["ipAddress"]}/quitMirror`).map(res => res.json()).subscribe(
         data => {
           console.log(data);
         },err => {
-          //this.toast_error.present();
+          this.alert( {title:"Server connection", msg:"We can not connect to server please check your connection with server then try again."})
         }
     );
-  }
+  } //@Function: btn_quitMirorr()
 
   btn_reloadMirorr(){
-    this.http.get('http://localhost:3000/reloadMirror').map(res => res.json()).subscribe(
+    this.http.get(`${this.settings["ipAddress"]}/reloadMirror`).map(res => res.json()).subscribe(
         data => {
           console.log(data);
         },err => {
-          //this.toast_error.present();
+          this.alert( {title:"Server connection", msg:"We can not connect to server please check your connection with server then try again."})
         }
     );
-  }
+  } //@Function: btn_reloadMirorr()
 
   openModal(_location){
     let modulePostion = []
     console.log(this.mirro_config["modulePostion"])
     this.mirro_config["modulePostion"].forEach((val,index)=>{
-      if(val.postion == _location ){
+      if(val.postion == _location )
         modulePostion.push(val);
-      }
     });
     let myModal = this.modalCtrl.create(ModuleChosePage,{'Param': {"location":_location,"postion":modulePostion,"data":this.mirro_config['modulee']}});
-
     myModal.onDidDismiss(data => {
      console.log(data);
-     //this.mirro_config = data.conf
      this.getConfData();
    });
-
     myModal.present();
+  } //@Function: openModal()
 
-  }
+
+  alert( data:any ) {
+    let alert = this.alertCtrl.create({
+      title: data.title,
+      subTitle: data.msg,
+      buttons: [
+        {
+          text: 'Try Again',
+          role: 'Dismiss',
+          handler: () => {
+            window.location.reload();
+          }
+        }
+      ]
+    });
+    alert.present();
+  } //@Function: alert()
 
   getConfData(){
-      this.http.get('http://localhost:3000/conf').map(res => res.json()).subscribe(
+      this.http.get(`${this.settings["ipAddress"]}/conf`)
+      .map(res => res.json())
+      .subscribe(
         data => {
-
-          data['modulee'].forEach(function(index){
-          //  console.log(index)
-          })
-          //console.log(data)
           this.mirro_config = data
-
-
         },err => {
-          //this.toast_error.present();
+          this.alert( {title:"Server connection", msg:"We can not connect to server please check your connection with server then try again."})
         }
     );
-  }
+  } //@Function: getConfData()
 
 
   changeBright(){
-
     console.log((this.windows_bright / 100))
     this.socket.emit("changeBright", (this.windows_bright / 100));
-
-  }
+  } //@Function: changeBright()
 
   changeZoom(){
-
     console.log((this.windows_zoom / 100))
     this.socket.emit("changeZoom", (this.windows_zoom / 100));
-
-  }
+  } //@Function: changeZoom()
 
   changeOff(){
     console.log(this.windows_off)
     this.socket.emit("windows_off", this.windows_off);
-  }
+  } //@Function: changeOff()
 
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
-
     setTimeout(() => {
       console.log('Async operation has ended');
       refresher.complete();
     }, 2000);
-  }
+  } //@Function: doRefresh()
 
 
-}
+} //@Class: HomePage()
