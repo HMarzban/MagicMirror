@@ -12,14 +12,15 @@
  let dir_module = (_name) => path.join(__dirname,`../module/${_name}`);
 
 
+ program
+ .version(`\n   ${chalk.blue("[MagicMirror]: ")} ${chalk.yellow("0.3.0 Version")} \n`, '-v, --version')
 
 /**
  * Creat new Module
  */
  program
-  .version('0.0.1')
-  .command('creat module')
-  .description('Creat Module base on moduleName and moduleDisplayName')
+  .command('creat')
+  .description('Creat a Module base on moduleName and moduleDisplayName')
   .action(function (modulename, cmd) {
     var questions =
      [{
@@ -93,6 +94,7 @@
         `;
 
         fs.mkdirSync(dir);
+        log(`\n${chalk.green("Magic Mirror Create a module process: ")}\n`);
         log(`${chalk.blue('1: ')}CModule   ${chalk.yellow(' Directory ')}`);
 
         fs.writeFileSync(`${dir}/md_${moduleName}.js`, Js_defualt, 'utf8');
@@ -140,9 +142,8 @@
  * remove module
  */
 program
-.version('0.0.1')
 .command('remove module')
-.description('Remove Module base on list of modules')
+.description('Remove a Module base on list of modules')
 .action(function (modulename, cmd) { 
 
     //list of all module we have
@@ -185,6 +186,8 @@ program
                 conf["modulee"].splice(index, 1)
             }
         });
+        log(`\n${chalk.green("Magic Mirror Remove a module process: ")}\n`);
+
         log(`${chalk.blue('1: ')}RModule From  ${chalk.yellow(' Module List ')}`);
 
         /**
@@ -225,9 +228,8 @@ program
  * Add New Proprety to Module
  */
 program
-.version('0.0.1')
 .command('aprop')
-.description('Add New Proprety to Module')
+.description('Add a New Proprety to Module')
 .action(function (modulename, cmd) {
 
     //list of all module we have
@@ -376,9 +378,8 @@ function inputType_select (){
  * Remove Prop
  */
 program
-.version('0.0.1')
 .command('rprop')
-.description('Remove New Proprety to Module')
+.description('Remove a Proprety From Module')
 .action(function (modulename, cmd) {
 
     //list of all module we have
@@ -459,7 +460,7 @@ function fn_removeProp (_moduleName,_SettingName){
 
         log(`${chalk.blue('2: ')}RProp From  ${chalk.yellow(' DataBase ')}`);
 
-        log(`${chalk.blue('3:')} ${chalk.magenta.bold('"'+moduleName+'"_property') }  ${chalk.green.bold('Remove Succefully. ')}`);
+        log(`${chalk.blue('3:')} ${chalk.magenta.bold('"'+_moduleName+'"_property') }  ${chalk.green.bold('Remove Succefully. ')}`);
             
 
 
