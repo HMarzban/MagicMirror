@@ -28,4 +28,4 @@ ionic serve -o
 
 ### Demo:
 
-<a href="windows/assets/video/Demo.mp4" target="_blank">Video Demo </a>
+<a href="windows/assets/video/Demo.mp4" target="_blank" download>Video Demo </a>
