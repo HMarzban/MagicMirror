@@ -28,7 +28,4 @@ ionic serve -o
 
 ### Demo:
 
-<video width="320" height="240" controls>
-  <source src="windows/assets/video/Demo.mp4" type="video/mp4">
-Your browser does not support the video tag.
-</video>
+<a href="windows/assets/video/Demo.mp4" target="_blank">Video Demo </a>
