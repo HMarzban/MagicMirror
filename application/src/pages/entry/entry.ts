@@ -52,7 +52,8 @@ export class EntryPage {
 
   entryForm(){
     if(!this.spinner){
-      if(this.entry.IpAddress.length >= 10){
+      
+      if(this.entry.IpAddress.length >= 7){
         
           const settings = {
             ipAddress : `http://${this.entry.IpAddress}:3000`,
