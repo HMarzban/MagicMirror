@@ -12,7 +12,7 @@ npm install
 # start electron application
 npm start
 ```
-<a href=""> More details...</a>
+<a href="./windows "> More details...</a>
 
 ### Run Mobile Application:
 ```bash
@@ -24,7 +24,7 @@ npm install
 # start ionic serve
 ionic serve -o
 ```
-<a href=""> More details...</a>
+<a href="./application"> More details...</a>
 
 ### Demo:
 
