@@ -1,11 +1,11 @@
 # magic-mirror
 magic mirror - raspberry pi 3 - electron
 
-I'm working on it, after the finish, I will be updating Readme.md
+I'm working on it.
 
-## what I'm working on now?
+## What am I doing now?
 the application which can connect to mirror and manage modules remotely.
 you can access it, in application branch.
 
 new update: 27/06/2018
-making Raspberry Pi as a smart hub, witch smart devices can connect to the hub with the specific protocol schema, and show and control smart devices functions by mobile application and the magic mirror.
+making Raspberry Pi as a smart hub, which smart devices can connect to the hub with the specific protocol schema, and show and control smart devices functions by mobile application and the magic mirror.
