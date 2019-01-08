@@ -12,4 +12,4 @@ making Raspberry Pi as a smart hub, which smart devices can connect to the hub w
 
 ### Demo:
 
-<a href="windows/assets/video/Demo.mp4" target="_blank" download>Video Demo </a>
+<a href="https://github.com/HosseinMarzban/MagicMirror/blob/application/windows/assets/video/Demo.mp4" target="_blank" download>Video Demo </a>
