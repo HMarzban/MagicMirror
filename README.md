@@ -1,5 +1,5 @@
 # Magic-Mirror [in Develop]
-Magic Mirror - Raspberry PI 3 - Rlectron
+Magic Mirror - Raspberry PI 3 - Electron
 
 
 ### Run Desktop Application:
@@ -33,6 +33,6 @@ ionic serve -o
 <a href="windows/assets/video/Demo.mp4" target="_blank" download>Dwonalod Demo as a Video </a>
 
 
-## Custom Cli Demo
+## Demo, Built in Cli For Creat New Module:
 <img src="windows/assets/img/Demo-1.gif">
 <a href="./windows "> More details...</a>
