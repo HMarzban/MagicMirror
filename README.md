@@ -1,4 +1,4 @@
-# Magic-Mirror [in Develop]
+# Magic-Mirror [Developing]
 Magic Mirror - Raspberry PI 3 - Electron
 
 
