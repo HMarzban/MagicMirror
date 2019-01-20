@@ -38,7 +38,8 @@ $.fn.md_calendar = function (options) {
             <div class="qamari">${$cal.cal[$Currnet_year].qamari}</div>
         `);
         $.each($cal.cal[$Currnet_year].event[($Current_month - 1)], function (index, val) {
-            //TODO:find way to fix it!
+            // TODO:find way to fix it!
+            // Find closet event
             let close = closest($cal.cal[$Currnet_year].event[($Current_month - 1)], parseInt($currnet_day)).text   
             $this.find('.footer ul').append(` <li class="${val.isHoliday ? 'isHoliday ' : ''}${close === val.text ? 'closest' : ''}"> ` + val.text + ` </li> `);
         });

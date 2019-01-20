@@ -26,6 +26,13 @@ ionic serve -o
 ```
 <a href="./application"> More details...</a>
 
-### Demo:
+## Main Demo:
 
-<a href="windows/assets/video/Demo.mp4" target="_blank" download>Video Demo </a>
+<img src="windows/assets/img/mainDemo.gif">
+
+<a href="windows/assets/video/Demo.mp4" target="_blank" download>Dwonalod Demo as a Video </a>
+
+
+## Custom Cli Demo
+<img src="windows/assets/img/Demo-1.gif">
+<a href="./windows "> More details...</a>
