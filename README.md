@@ -1,4 +1,8 @@
-# Magic-Mirror [Developing]
+## Historical hardware prototype
+
+This project preserves an Electron / Ionic / Raspberry Pi prototype. The desktop and mobile demonstrations are retained; device and IoT experiments include unfinished work. The original Electron 3, Angular 5, and Ionic 3 toolchain is historical. See [architecture and scope](ARCHITECTURE.md) for the parts and their limits.
+
+# MagicMirror
 Magic Mirror - Raspberry PI 3 - Electron
 
 
@@ -12,7 +16,7 @@ npm install
 # start electron application
 npm start
 ```
-<a href="./windows "> More details...</a>
+<a href="./windows"> More details...</a>
 
 ### Run Mobile Application:
 ```bash
@@ -35,4 +39,4 @@ ionic serve -o
 
 ## Demo, Built in Cli For Creat New Module:
 <img src="windows/assets/img/Demo-1.gif">
-<a href="./windows "> More details...</a>
+<a href="./windows"> More details...</a>
